@@ -1,0 +1,53 @@
+{
+    "users": [
+        {
+        "id": 1,
+        "nom": "Jonh doe",
+        "motDePasse": "12345678",
+        "email": "julie@yahoo.com",
+        "role":"Administrateur"
+        },
+        {
+        "id": 2,
+        "name": "James Williams",
+        "motDePasse": "00000000",
+        "email": "jameswilly@gmail.com",
+        "role":"Client"
+
+        }
+    ],
+
+    "roles": [
+        {
+            "id": 1,
+            "titre": "Administrateur",
+            "permissions": [
+                "ajouter_utilisateur",
+                "modifier_utilisateur",
+                "supprimer_utilisateur",
+                "voir_utilisateurs",
+                "ajouter_article",
+                "modifier_article",
+                "supprimer_article",
+                "voir_articles"
+            ]
+        },
+        {
+            "id": 2,
+            "titre": "Gestionnaire",
+            "permissions": [
+                "ajouter_article",
+                "modifier_article",
+                "supprimer_article",
+                "voir_articles"
+            ]
+        },
+        {
+            "id": 3,
+            "titre": "Client",
+            "permissions": [
+                "voir_articles"
+            ]
+        }
+    ]
+}
