@@ -5,14 +5,14 @@
         "nom": "Jonh doe",
         "motDePasse": "12345678",
         "email": "julie@yahoo.com",
-        "role":"Administrateur"
+        "role":1
         },
         {
         "id": 2,
         "name": "James Williams",
         "motDePasse": "00000000",
         "email": "jameswilly@gmail.com",
-        "role":"Client"
+        "role":2
 
         }
     ],
