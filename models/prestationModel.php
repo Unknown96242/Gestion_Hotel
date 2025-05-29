@@ -5,7 +5,7 @@
         $sql = "SELECT * FROM prestation";
         $stmt = $pdo->query($sql);
         $prestation = $stmt ->fetchAll();
-        return $stmt->rowCount()>0;
+        return $prestation;
     }
     
     // creation de la prestation
@@ -16,7 +16,7 @@
         return $stmt->rowCount()>0;
     }
  
-    //Modifier une chambre
+    //Modifier une prestation
     function modifierPrestation(PDO $pdo,$id,$prix,$description){
 
         $sql = "UPDATE prestation SET id = ?, prix = ?, description = ?,WHERE id=?";
@@ -26,7 +26,7 @@
         return $stmt->rowCount()>0;
     }
 
-    // Supprimer chambre
+    // Supprimer prestation
     function supprimerPrestation(PDO $pdo, $id){
         $sql = "DELETE * FROM prestation WHERE id=?";
         $stmt= $pdo->prepare($sql);
