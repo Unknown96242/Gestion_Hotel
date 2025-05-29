@@ -7,7 +7,7 @@
         $prefixe = strtoupper($prefixe);
         if (!preg_match('/^[A-Z]$/', $prefixe)) {
             throw new InvalidArgumentException("Le préfixe doit être une lettre A-Z");
-        }
+        } 
 
         $maxTentatives = 100;
         $numeroChambre = '';
