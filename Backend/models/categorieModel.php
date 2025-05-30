@@ -1,5 +1,4 @@
 <?php
-    require_once "./../config/dbConnection.php";
 
     //Creation d'une categorie
     function createCategorie(PDO $pdo,$description, $prixNuite){        
@@ -22,13 +21,11 @@
     }
 
      //Modifier une categorie
-    function modifierCategorie(PDO $pdo, $description, $prixNuite){
-
-        $SQL_UPDATE_CATEGORIE = "UPDATE categorie SET description = ?, prixNuite = ?  WHERE id=?";
-        $stmt = $pdo->prepare($SQL_UPDATE_CATEGORIE);
-        $stmt->execute([$description, $prixNuite]);
-
-        return $stmt->rowCount()>0;
+    function modifierCategorie(PDO $pdo, $description, $prixNuite, $id) {
+    $SQL_UPDATE_CATEGORIE = "UPDATE categorie SET description = ?, prixNuite = ?  WHERE id=?";
+    $stmt = $pdo->prepare($SQL_UPDATE_CATEGORIE);
+    $stmt->execute([$description, $prixNuite, $id]);
+    return $stmt->rowCount()>0;
     }
 
     // Supprimer categorie
