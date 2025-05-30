@@ -1,3 +1,13 @@
+<!-- // PHP
+if(!empty($_POST['interests'])) {
+    $selectedInterests = $_POST['interests'];
+    // $selectedInterests est un tableau contenant les valeurs cochées
+    foreach($selectedInterests as $interest) {
+        echo "Intérêt sélectionné : " . htmlspecialchars($interest) . "<br>";
+    }
+} else {
+    echo "Aucun intérêt sélectionné";
+} -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +16,11 @@
     <title>Gestion Hotel</title>
 </head>
 <body>
-    <h1>page gestionnaire</h1>
+    <!-- // HTML (notez les crochets [] dans le name) sa permet de creer un tableau des elements selectionnés en back-->
+    <input type="checkbox" name="interests[]" value="sports"> Sports
+    <input type="checkbox" name="interests[]" value="music"> Musique
+    <input type="checkbox" name="interests[]" value="reading"> Lecture
+
+
 </body>
 </html>
