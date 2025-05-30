@@ -1,0 +1,73 @@
+<?php
+require_once __DIR__ . '/../Backend/controllers/categorieController.php';
+
+// Définir le type de réponse
+header('Content-Type: application/json');
+
+// Récupérer la méthode HTTP
+$method = $_SERVER['REQUEST_METHOD'];
+
+switch ($method) {
+    case 'GET':
+        // Récupérer toutes les catégories
+        $categories = handleGetCategorie();
+        echo json_encode($categories);
+        break;
+
+    case 'POST':
+        // Créer une nouvelle catégorie
+        $data = json_decode(file_get_contents('php://input'), true);
+        if (isset($data['description'], $data['prixNuite'])) {
+            $result = handleCreateCategorie($data['description'], $data['prixNuite']);
+            if ($result) {
+                http_response_code(201);
+                echo json_encode(['success' => true]);
+            } else {
+                http_response_code(500);
+                echo json_encode(['error' => 'Erreur lors de la création']);
+            }
+        } else {
+            http_response_code(400);
+            echo json_encode(['error' => 'Paramètres manquants']);
+        }
+        break;
+
+    case 'PUT':
+        // Modifier une catégorie
+        $data = json_decode(file_get_contents('php://input'), true);
+        if (isset($data['id'], $data['description'], $data['prixNuite'])) {
+            $result = handleModifierCategorie($data['description'], $data['prixNuite'], $data['id']);
+            if ($result) {
+                echo json_encode(['success' => true]);
+            } else {
+                http_response_code(404);
+                echo json_encode(['error' => 'Catégorie non trouvée ou non modifiée']);
+            }
+        } else {
+            http_response_code(400);
+            echo json_encode(['error' => 'Paramètres manquants']);
+        }
+        break;
+
+    case 'DELETE':
+        // Supprimer une catégorie
+        parse_str(file_get_contents('php://input'), $data);
+        if (isset($data['id'])) {
+            $result = handleSupprimerCategorie($data['id']);
+            if ($result) {
+                echo json_encode(['success' => true]);
+            } else {
+                http_response_code(404);
+                echo json_encode(['error' => 'Catégorie non trouvée ou non supprimée']);
+            }
+        } else {
+            http_response_code(400);
+            echo json_encode(['error' => 'Paramètre id manquant']);
+        }
+        break;
+
+    default:
+        http_response_code(405);
+        echo json_encode(['error' => 'Méthode non autorisée']);
+        break;
+}
