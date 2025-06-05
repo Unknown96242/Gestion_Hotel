@@ -1,0 +1,54 @@
+<?php
+require_once __DIR__ . '/../Backend/controllers/prestationController.php';
+
+header('Content-Type: application/json');
+$method = $_SERVER['REQUEST_METHOD'];
+
+switch ($method) {
+    case 'GET':
+        // Lister toutes les prestations
+        $prestations = handleListerPrestation();
+        echo json_encode($prestations);
+        break;
+
+    case 'POST':
+        // Créer une prestation
+        $data = json_decode(file_get_contents('php://input'), true);
+        if (isset($data['id'], $data['prix'], $data['description'])) {
+            $result = handleCreatePrestation($data['id'], $data['prix'], $data['description']);
+            echo json_encode(['success' => $result]);
+        } else {
+            http_response_code(400);
+            echo json_encode(['error' => 'Paramètres manquants']);
+        }
+        break;
+
+    case 'PUT':
+        // Modifier une prestation
+        $data = json_decode(file_get_contents('php://input'), true);
+        if (isset($data['id'], $data['prix'], $data['description'])) {
+            $result = handleModifierPrestation($data['id'], $data['prix'], $data['description']);
+            echo json_encode(['success' => $result]);
+        } else {
+            http_response_code(400);
+            echo json_encode(['error' => 'Paramètres manquants']);
+        }
+        break;
+
+    case 'DELETE':
+        // Supprimer une prestation
+        parse_str(file_get_contents('php://input'), $data);
+        if (isset($data['id'])) {
+            $result = handleSupprimerPrestation($data['id']);
+            echo json_encode(['success' => $result]);
+        } else {
+            http_response_code(400);
+            echo json_encode(['error' => 'Paramètre id manquant']);
+        }
+        break;
+
+    default:
+        http_response_code(405);
+        echo json_encode(['error' => 'Méthode non autorisée']);
+        break;
+}

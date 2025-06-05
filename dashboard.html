@@ -1,0 +1,151 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800"/>
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f1f2f4] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#121516]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z"
+                  fill="currentColor"
+                ></path>
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="text-[#121516] text-lg font-bold leading-tight tracking-[-0.015em]">Hotel Admin</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-[#121516] text-sm font-medium leading-normal" href="dashboard.html">Dashboard</a>
+              <a class="text-[#121516] text-sm font-medium leading-normal" href="Hotel.html">Bookings</a>
+              <a class="text-[#121516] text-sm font-medium leading-normal" href="Reservation.html">Reservation</a>
+              <a class="text-[#121516] text-sm font-medium leading-normal" href="#">Users</a>
+              <a class="text-[#121516] text-sm font-medium leading-normal" href="#">Settings</a>
+            </div>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC4qD0peTPPWo6nAolEYb-MScbQN_YSvcsc4T85crzhUYjx23vPnlq9tTxmGr6KA6vOvlZifDGpdMqwAL8ST5ljV1fCe58mJSwzhkgGyO3Vw95pECHGPDQW1mn8RsWtfBjIBFRyXjB7JJW7Ln4DkTYkLFqwl6ajXcbRtJleCU37q3Jv-9iWFd0kjKLBvj8eRSIw5a1zg0uIIM6JAym7Uz1wpc9VbUpOJysAdp037AP9B1LfP-FFvKaUYi1SgJuzsGPCeiPwrZCFs1I");'
+            ></div>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-[#121516] tracking-light text-[32px] font-bold leading-tight min-w-72">Dashboard</p></div>
+            <div class="flex flex-wrap gap-4 p-4">
+              <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 bg-[#f1f2f4]">
+                <p class="text-[#121516] text-base font-medium leading-normal">Total Bookings</p>
+                <p class="text-[#121516] tracking-light text-2xl font-bold leading-tight">1,234</p>
+                <p class="text-[#078838] text-base font-medium leading-normal">+10%</p>
+              </div>
+              <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 bg-[#f1f2f4]">
+                <p class="text-[#121516] text-base font-medium leading-normal">Revenue</p>
+                <p class="text-[#121516] tracking-light text-2xl font-bold leading-tight">$56,789</p>
+                <p class="text-[#078838] text-base font-medium leading-normal">+5%</p>
+              </div>
+              <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 bg-[#f1f2f4]">
+                <p class="text-[#121516] text-base font-medium leading-normal">Active Users</p>
+                <p class="text-[#121516] tracking-light text-2xl font-bold leading-tight">456</p>
+                <p class="text-[#078838] text-base font-medium leading-normal">+8%</p>
+              </div>
+            </div>
+            <h2 class="text-[#121516] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Trends</h2>
+            <div class="flex flex-wrap gap-4 px-4 py-6">
+              <div class="flex min-w-72 flex-1 flex-col gap-2 rounded-xl border border-[#dde1e3] p-6">
+                <p class="text-[#121516] text-base font-medium leading-normal">Bookings Over Time</p>
+                <p class="text-[#121516] tracking-light text-[32px] font-bold leading-tight truncate">1,234</p>
+                <div class="flex gap-1">
+                  <p class="text-[#6a7781] text-base font-normal leading-normal">Last 30 Days</p>
+                  <p class="text-[#078838] text-base font-medium leading-normal">+10%</p>
+                </div>
+                <div class="flex min-h-[180px] flex-1 flex-col gap-8 py-4">
+                  <svg width="100%" height="148" viewBox="-3 0 478 150" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                    <path
+                      d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H326.769H0V109Z"
+                      fill="url(#paint0_linear_1131_5935)"
+                    ></path>
+                    <path
+                      d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25"
+                      stroke="#6a7781"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                    ></path>
+                    <defs>
+                      <linearGradient id="paint0_linear_1131_5935" x1="236" y1="1" x2="236" y2="149" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#f1f2f4"></stop>
+                        <stop offset="1" stop-color="#f1f2f4" stop-opacity="0"></stop>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div class="flex justify-around">
+                    <p class="text-[#6a7781] text-[13px] font-bold leading-normal tracking-[0.015em]">Jan</p>
+                    <p class="text-[#6a7781] text-[13px] font-bold leading-normal tracking-[0.015em]">Feb</p>
+                    <p class="text-[#6a7781] text-[13px] font-bold leading-normal tracking-[0.015em]">Mar</p>
+                    <p class="text-[#6a7781] text-[13px] font-bold leading-normal tracking-[0.015em]">Apr</p>
+                    <p class="text-[#6a7781] text-[13px] font-bold leading-normal tracking-[0.015em]">May</p>
+                    <p class="text-[#6a7781] text-[13px] font-bold leading-normal tracking-[0.015em]">Jun</p>
+                    <p class="text-[#6a7781] text-[13px] font-bold leading-normal tracking-[0.015em]">Jul</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex min-w-72 flex-1 flex-col gap-2 rounded-xl border border-[#dde1e3] p-6">
+                <p class="text-[#121516] text-base font-medium leading-normal">Revenue by Hotel</p>
+                <p class="text-[#121516] tracking-light text-[32px] font-bold leading-tight truncate">$56,789</p>
+                <div class="flex gap-1">
+                  <p class="text-[#6a7781] text-base font-normal leading-normal">Last 30 Days</p>
+                  <p class="text-[#078838] text-base font-medium leading-normal">+5%</p>
+                </div>
+                <div class="grid min-h-[180px] grid-flow-col gap-6 grid-rows-[1fr_auto] items-end justify-items-center px-3">
+                  <div class="border-[#6a7781] bg-[#f1f2f4] border-t-2 w-full" style="height: 30%;"></div>
+                  <p class="text-[#6a7781] text-[13px] font-bold leading-normal tracking-[0.015em]">Hotel A</p>
+                  <div class="border-[#6a7781] bg-[#f1f2f4] border-t-2 w-full" style="height: 80%;"></div>
+                  <p class="text-[#6a7781] text-[13px] font-bold leading-normal tracking-[0.015em]">Hotel B</p>
+                  <div class="border-[#6a7781] bg-[#f1f2f4] border-t-2 w-full" style="height: 90%;"></div>
+                  <p class="text-[#6a7781] text-[13px] font-bold leading-normal tracking-[0.015em]">Hotel C</p>
+                  <div class="border-[#6a7781] bg-[#f1f2f4] border-t-2 w-full" style="height: 20%;"></div>
+                  <p class="text-[#6a7781] text-[13px] font-bold leading-normal tracking-[0.015em]">Hotel D</p>
+                  <div class="border-[#6a7781] bg-[#f1f2f4] border-t-2 w-full" style="height: 20%;"></div>
+                  <p class="text-[#6a7781] text-[13px] font-bold leading-normal tracking-[0.015em]">Hotel E</p>
+                  <div class="border-[#6a7781] bg-[#f1f2f4] border-t-2 w-full" style="height: 40%;"></div>
+                  <p class="text-[#6a7781] text-[13px] font-bold leading-normal tracking-[0.015em]">Hotel F</p>
+                  <div class="border-[#6a7781] bg-[#f1f2f4] border-t-2 w-full" style="height: 100%;"></div>
+                  <p class="text-[#6a7781] text-[13px] font-bold leading-normal tracking-[0.015em]">Hotel G</p>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-[#121516] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Quick Actions</h2>
+            <div class="flex justify-stretch">
+              <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-start">
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#b2d0e5] text-[#121516] text-sm font-bold leading-normal tracking-[0.015em]"
+                >
+                  <span class="truncate">Add New Hotel</span>
+                </button>
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f1f2f4] text-[#121516] text-sm font-bold leading-normal tracking-[0.015em]"
+                >
+                  <span class="truncate">View Bookings</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

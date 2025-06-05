@@ -1,5 +1,4 @@
 <?php
-    require_once "./../config/dbConnection.php";
     //Creation pour lister les prestations par le client
     function ListerPrestation(PDO $pdo){
         $sql = "SELECT * FROM prestation";
