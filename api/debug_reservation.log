@@ -8,5 +8,5 @@ Array
     [cout_total] => 
     [status] => en attente
     [id_client_fk] => 2
-    [date_limite] => 2025-06-03
+    [date_limite] => 2025-06-03, 00:00:00
 )
