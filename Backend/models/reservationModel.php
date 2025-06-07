@@ -1,14 +1,21 @@
 <?php
 //lister les reservations par le client
 function ListerAllReservation(PDO $pdo) {
-    $sql ="SELECT*FROM reservation INNER JOIN client ON client.id = reservation.id_client_fk";
+    $sql = "SELECT 
+                reservation.id AS reservation_id,
+                client.id AS client_id,
+                reservation.*,
+                client.nom AS client_nom,
+                client.prenom AS client_prenom
+            FROM reservation
+            INNER JOIN client ON client.id = reservation.id_client_fk";
     $stmt = $pdo->query($sql);
     $reservation = $stmt->fetchAll();
     return $reservation;
 }
 //recuperer une reservation par son id
 function ListerReservationById(PDO $pdo, $id) {
-    $sql = "SELECT*FROM reservation INNER JOIN client ON client.id = reservation.id_client_fk WHERE id=?";
+    $sql = "SELECT*FROM reservation INNER JOIN client ON client.id = reservation.id_client_fk WHERE reservation.id=?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$id]);
     return $stmt->fetch();

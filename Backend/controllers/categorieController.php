@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../config/dbConnection.php';
 require_once __DIR__ . '/../models/categorieModel.php';
 
 // Créer une catégorie

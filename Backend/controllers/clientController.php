@@ -21,3 +21,8 @@ function handleSupprimerClient($id) {
 function handleGetClient($id) {
     return getClient($id);
 }
+
+// Récupérer tous les clients
+function handleGetAllClients() {
+    return getAllClients();
+}
