@@ -6,7 +6,7 @@ function ListerReservation(PDO $pdo) {
     return ListerAllReservation($pdo);
 }
 // Créer une nouvelle reservation
-function createReservation(PDO $pdo, $id, $id_client_fk, $status, $mode_paiement, $date_limite, $date_deb, $date_fin, $cout_total, $id_chambre, $id_prestation_fk) {
+function createReservation(PDO $pdo, $id_client_fk, $status, $mode_paiement, $date_limite, $date_deb, $date_fin, $cout_total, $id_chambre, $id_prestation_fk) {
     // Vérification des paramètres obligatoires
     if (empty($id_client_fk) || empty($status) || empty($mode_paiement) || empty($date_deb) || empty($date_fin) || empty($id_chambre)) {
         return ["error" => "Paramètres manquants"];
@@ -16,7 +16,7 @@ function createReservation(PDO $pdo, $id, $id_client_fk, $status, $mode_paiement
         return ["error" => "La date de début doit être avant la date de fin"];
     }
     // Appel au modèle si tout est OK
-    return createNewReservation($pdo, $id, $id_client_fk, $status, $mode_paiement, $date_limite, $date_deb, $date_fin, $cout_total, $id_chambre, $id_prestation_fk);
+    return createNewReservation($pdo, $id_client_fk, $status, $mode_paiement, $date_limite, $date_deb, $date_fin, $cout_total, $id_chambre, $id_prestation_fk);
 }
 // Modifier une reservation existante
 function updateReservation(PDO $pdo, $id, $id_client_fk, $status, $mode_paiement, $date_limite, $date_deb, $date_fin, $cout_total, $id_chambre, $id_prestation_fk) {

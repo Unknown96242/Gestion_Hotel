@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier une réservation</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(120deg, #f8fafc 60%, #e0e7ef 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .layout-content-container {
+            max-width: 48rem;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+        .form-section {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
+            border: 1px solid #dde1e3;
+            padding: 2.5rem 2rem;
+            margin-top: 2rem;
+        }
+        .form-title {
+            color: #121516;
+            font-size: 2.2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+        .form-label {
+            color: #121516;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+        .form-input, .form-select {
+            width: 100%;
+            border-radius: 0.75rem;
+            border: 1px solid #dde1e3;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1.25rem;
+            font-size: 1rem;
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+        .form-input:focus, .form-select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px #2563eb22;
+            outline: none;
+        }
+        .form-input[disabled] {
+            background: #f1f2f4;
+            color: #6a7781;
+        }
+        .form-btn {
+            background: linear-gradient(90deg, #2563eb 60%, #1d4ed8 100%);
+            color: #fff;
+            font-weight: 500;
+            padding: 0.7rem 2.5rem;
+            border-radius: 0.75rem;
+            transition: background 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px 0 rgba(37,99,235,0.08);
+        }
+        .form-btn:hover {
+            background: linear-gradient(90deg, #1d4ed8 60%, #2563eb 100%);
+            box-shadow: 0 4px 16px 0 rgba(37,99,235,0.12);
+        }
+        #toast-message {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #333;
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: 8px;
+            z-index: 9999;
+            min-width: 200px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            font-size: 16px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        #toast-message.show {
+            display: block;
+            opacity: 1;
+        }
+        @media (max-width: 600px) {
+            .layout-content-container, .form-section {
+                padding: 0.5rem;
+            }
+            #toast-message {
+                right: 10px;
+                left: 10px;
+                min-width: unset;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout-content-container">
+        <div class="form-title">
+            Modifier une réservation
+        </div>
+        <form id="form-modifier-reservation" class="form-section space-y-4">
+            <input type="hidden" name="reservation_id" id="reservation-id">
+            <div>
+                <label class="form-label" for="client">Client</label>
+                <input type="text" name="client" id="client" class="form-input" disabled>
+            </div>
+            <div>
+                <label class="form-label" for="chambre-select">Chambre</label>
+                <select name="id_chambre_fk" id="chambre-select" class="form-select" required></select>
+            </div>
+            <div>
+                <label class="form-label" for="prestation-select">Prestation</label>
+                <select name="id_prestation_fk" id="prestation-select" class="form-select">
+                    <option value="">Aucune</option>
+                </select>
+            </div>
+            <div>
+                <label class="form-label" for="date-deb">Date début</label>
+                <input type="date" name="date_deb" id="date-deb" class="form-input" required>
+            </div>
+            <div>
+                <label class="form-label" for="date-fin">Date fin</label>
+                <input type="date" name="date_fin" id="date-fin" class="form-input" required>
+            </div>
+            <div>
+                <label class="form-label" for="cout-total">Coût total</label>
+                <input type="number" name="cout_total" id="cout-total" class="form-input" required readonly>
+            </div>
+            <div>
+                <label class="form-label" for="status">Statut</label>
+                <select name="status" id="status" class="form-select" required>
+                    <option value="en attente">En attente</option>
+                    <option value="valider">Validée</option>
+                    <option value="annuler">Annulée</option>
+                </select>
+            </div>
+            <div>
+                <label class="form-label" for="mode-paiement">Mode de paiement</label>
+                <input type="text" name="mode_paiement" id="mode-paiement" class="form-input" required>
+            </div>
+            <div class="flex justify-end pt-4">
+                <button type="submit" class="form-btn">
+                    Enregistrer les modifications
+                </button>
+            </div>
+        </form>
+    </div>
+    <div id="toast-message"></div>
+    <script src="./js/modifier_reservation.js" type="module"></script>
+</body>
+</html>

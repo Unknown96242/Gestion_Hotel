@@ -42,7 +42,7 @@
     // Recuperer toutes les chambres
     function getChambre(PDO $pdo){
 
-        $SQL_SELECT_CHAMBRE = "SELECT * FROM chambre";
+        $SQL_SELECT_CHAMBRE = "SELECT * FROM chambre INNER JOIN categorie c ON c.id = chambre.id_categorie_fk";
         $stmt = $pdo->query($SQL_SELECT_CHAMBRE);
         $allChambres = $stmt->fetchAll();
 
@@ -51,7 +51,16 @@
 
     //Recuperer Chambre dispo
     function getChambreDispo(PDO $pdo){
-        $SQL_SELECT_CHAMBRE = "SELECT * FROM chambre where disponibilite=0";
+        $SQL_SELECT_CHAMBRE = "SELECT * FROM chambre INNER JOIN categorie c ON c.id = chambre.id_categorie_fk where status=1";
+        $stmt = $pdo->query($SQL_SELECT_CHAMBRE);
+        $allChambres = $stmt->fetchAll();
+
+        return $allChambres;
+    }
+    
+    //Recuperer Chambre non dispo
+    function getChambreNonDispo(PDO $pdo){
+        $SQL_SELECT_CHAMBRE = "SELECT * FROM chambre INNER JOIN categorie c ON c.id = chambre.id_categorie_fk where status=0";
         $stmt = $pdo->query($SQL_SELECT_CHAMBRE);
         $allChambres = $stmt->fetchAll();
 
@@ -61,7 +70,7 @@
     //Modifier une chambre
     function modifierChambre(PDO $pdo, $idChambre,$numero_fixe, $description, $id_categorie_fk, $id_hotel_fk, $disponibilite){
 
-        $SQL_UPDATE_CHAMBRE = "UPDATE chambre SET numero_fixe = ?, description = ?, id_categorie_fk= ?, id_hotel_fk= ?, disponibilite = ? WHERE id=?";
+        $SQL_UPDATE_CHAMBRE = "UPDATE chambre SET numero_fixe = ?, description = ?, id_categorie_fk= ?, id_hotel_fk= ?, status = ? WHERE id=?";
         $stmt = $pdo->prepare($SQL_UPDATE_CHAMBRE);
         $stmt->execute([$numero_fixe, $description, $id_categorie_fk, $id_hotel_fk, $disponibilite, $idChambre]);
 

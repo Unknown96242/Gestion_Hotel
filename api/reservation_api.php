@@ -1,6 +1,14 @@
 <?php
 require_once __DIR__ . '/../Backend/controllers/reservationController.php';
-
+// Autoriser les requêtes CORS
+// Permettre l'accès à toutes les origines, méthodes et en-têtes
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 
 header('Content-Type: application/json');
 // Récupération de la méthode HTTP
@@ -24,7 +32,16 @@ switch ($method) {
     case 'POST':
         // Créer une nouvelle réservation
         $data = json_decode(file_get_contents('php://input'), true);
-        if (!isset($data['id_client_fk']) || !isset($data['status']) || !isset($data['mode_paiement']) || !isset($data['date_limite']) || !isset($data['date_deb']) || !isset($data['date_fin']) || !isset($data['cout_total']) || !isset($data['id_chambre'])) {
+        if (
+            !isset($data['id_client_fk']) ||
+            !isset($data['status']) ||
+            !isset($data['mode_paiement']) ||
+            !isset($data['date_limite']) ||
+            !isset($data['date_deb']) ||
+            !isset($data['date_fin']) ||
+            !isset($data['cout_total']) ||
+            !isset($data['id_chambre_fk']) 
+        ) {
             http_response_code(400); // Mauvaise requête
             echo json_encode(["error" => "Paramètres manquants"]);
             exit;
@@ -32,8 +49,24 @@ switch ($method) {
         if (!isset($data['id_prestation_fk'])) {
             $data['id_prestation_fk'] = null; // Si pas de prestation, on met à null
         }
-        $result = createReservation($pdo, null, $data['id_client_fk'], $data['status'], $data['mode_paiement'], $data['date_limite'], $data['date_deb'], $data['date_fin'], $data['cout_total'], $data['id_chambre'], $data['id_prestation_fk']);
-        echo json_encode($result);
+        $result = createReservation(
+            $pdo,
+            $data['id_client_fk'],
+            $data['status'],
+            $data['mode_paiement'],
+            $data['date_limite'],
+            $data['date_deb'],
+            $data['date_fin'],
+            $data['cout_total'],
+            $data['id_chambre_fk'],
+            $data['id_prestation_fk']
+        );
+        if ($result) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Erreur lors de la création']);
+        }
+        file_put_contents('debug_reservation.log', print_r($data, true)); // Écrit dans un fichier
         break;
 
     case 'PUT':
@@ -55,8 +88,13 @@ switch ($method) {
     case 'DELETE':
         // Supprimer une réservation
         parse_str(file_get_contents("php://input"), $_DELETE);
+        if (!isset($_DELETE['id'])) {
+            http_response_code(400); // Mauvaise requête
+            echo json_encode(["error" => "Paramètre id manquant"]);
+            exit;
+        }
         $result = deleteReservation($pdo, $_DELETE['id']);
-        echo json_encode($result);
+        echo json_encode(['success' => $result]);
         break;
 
     default:

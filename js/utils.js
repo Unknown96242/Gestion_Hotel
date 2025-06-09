@@ -54,3 +54,37 @@ export function afficherMessage(parent, message, balise = "p", classe = "") {
 export function afficherErreurSimple(message, parent, classe = "erreur") {
     return afficherMessage(parent, message, "p", classe);
 }
+
+
+// Ajoute ceci en bas de reservation.js ou dans utils.js
+export function showToast(message, duration = 3000, type = 'info') {
+    let toast = document.getElementById('toast-message');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast-message';
+        document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.style.display = 'block';
+    toast.style.position = 'fixed';
+    toast.style.bottom = '30px';
+    toast.style.right = '30px';
+    toast.style.color = '#fff';
+    toast.style.padding = '16px 24px';
+    toast.style.borderRadius = '8px';
+    toast.style.zIndex = '9999';
+    toast.style.minWidth = '200px';
+    toast.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
+    toast.style.fontSize = '16px';
+    toast.style.textAlign = 'center';
+    if (type === 'success') {
+        toast.style.background = '#22c55e';
+    } else if (type === 'error') {
+        toast.style.background = '#ef4444';
+    } else {
+        toast.style.background = '#333';
+    }
+    setTimeout(() => {
+        toast.style.display = 'none';
+    }, duration);
+}

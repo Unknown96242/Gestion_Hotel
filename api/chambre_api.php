@@ -1,6 +1,12 @@
 <?php
 require_once __DIR__ . '/../Backend/controllers/chambreController.php';
-
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 header('Content-Type: application/json');
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -9,7 +15,9 @@ switch ($method) {
         // Récupérer toutes les chambres ou seulement les disponibles
         if (isset($_GET['dispo']) && $_GET['dispo'] == 1) {
             $chambres = handleGetChambreDispo();
-        } else {
+        }elseif(isset($_GET['dispo']) && $_GET['dispo'] == 0){
+            $chambres = handleGetChambreNonDispo();
+        }else {
             $chambres = handleGetChambre();
         }
         echo json_encode($chambres);

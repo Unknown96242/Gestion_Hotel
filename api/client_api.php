@@ -1,18 +1,24 @@
 <?php
 require_once __DIR__ . '/../Backend/controllers/ClientController.php';
-
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 header('Content-Type: application/json');
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'GET':
-        // Récupérer un client par id
+        // Récupérer un client par id ou tous les clients
         if (isset($_GET['id'])) {
             $client = handleGetClient($_GET['id']);
             echo json_encode($client);
         } else {
-            http_response_code(400);
-            echo json_encode(['error' => 'Paramètre id manquant']);
+            $clients = handleGetAllClients();
+            echo json_encode($clients);
         }
         break;
 
