@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <!-- navbar et logo -->
+      <img src="" alt="logo" />
+      <nav>
+        <a href="chambre.html">Chambres</a>
+        <a href="dashboard.html">Tableau de bord</a>
+        <a href="gestionnaire.html">Gestionnaire</a>
+        <a href="ajouter_reservation.html">Reservations</a>
+      </nav>
+    </header>
+    <main>
+      <p>Modifier les informations de l'Hotel</p>
+      <hr />
+      <form action="" method="post" id="form">
+        <label for="nom">Nom de l’hôtel :</label><br />
+        <input type="text" id="nom" name="nom" value="" required /><br /><br />
+
+        <label for="chambre">Nombres de chambres :</label><br />
+        <input
+          type="number"
+          id="chambre"
+          name="chambre"
+          value=""
+          required
+        /><br /><br />
+
+        <button type="submit" id="bouton">Enregistrer</button>
+      </form>
+    </main>
+
+    <script src="js/hotel.js"></script>
+  </body>
+</html>
