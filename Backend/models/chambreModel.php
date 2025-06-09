@@ -1,7 +1,4 @@
 <?php
-    require_once "./../config/dbConnection.php";
-
-
     function genererNumeroChambreUnique(PDO $pdo, $prefixe = 'A'){
         // Validation du préfixe
         $prefixe = strtoupper($prefixe);

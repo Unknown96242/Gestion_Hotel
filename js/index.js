@@ -19,12 +19,12 @@ function afficherSpinner() {
 recupererDonnee('http://localhost:3000/roles')
 .then( data => {        
     for(const role of data){
-        select.innerHTML += `<option value="${role.titre}" id ='${role.id}'>${role.titre}</option>`    
+        select.innerHTML += `<option value="${role.id}" id ='${role.id}'>${role.titre}</option>`    
     }
 })
 .catch((error) => {
     console.error("Erreur lors de la récupération des données :", error);
-    afficherErreurSimple("Une erreur s'est produite lors de la récupération des rôles.", retourTraitement)
+    afficherErreurSimple("rôles introuvables.", retourTraitement)
 });
 
 
@@ -53,7 +53,8 @@ form.addEventListener('submit', function(e){
         const optionValue = select.value;
         let trouveEmail = false
         let pass = false;     
-        let i = 0;   
+        let i = 0; //represente l'index de l'utilisateur
+        //parcours de la liste des utilisateurs  
         for(const user of data){
             if (user.email === currentUser) {
                 trouveEmail = true
@@ -65,28 +66,36 @@ form.addEventListener('submit', function(e){
             i++;
         }
         if (trouveEmail && pass) {
-            if (data[i].role.toLowerCase() === optionValue.toLowerCase()) {
-                if ( optionValue.toLowerCase() === "administrateur") {
+            // Vérification du rôle
+            if (data[i].role == optionValue) {
+                // Redirection en fonction du rôle
+                if ( optionValue == 1) {
+                    //admin
                     afficherSpinner()
                     redirection('admin.html');
-                }else if(optionValue.toLowerCase() === "gestionnaire"){
+                }else if(optionValue.toLowerCase() == 2){
+                    //gestionnaire
                     afficherSpinner()
                     redirection('gestionnaire.html');
                 }
                 else{
+                    //utilisateur
                     afficherSpinner()
                     redirection('acceuil.html');
                 }
             } else {
+                // Afficher un message d'erreur si le rôle ne correspond pas
                 afficherErreurSimple( "Ce compte n'a pas ce role", retourTraitement)
                 return;
             }
             
         }else{
+            // Afficher un message d'erreur si l'email ou le mot de passe est incorrect
             trouveEmail?afficherErreurSimple('Mot de passe incorrect', retourTraitement ):afficherErreurSimple("Email non enregistre", retourTraitement);
         }
     })        
     .catch((error) => {
+        // Gérer les erreurs de récupération des données
         console.error("Erreur lors de la récupération des données :", error);
         afficherErreurSimple("Une erreur s'est produite lors de la connexion.", retourTraitement)
     });

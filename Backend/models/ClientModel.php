@@ -1,6 +1,4 @@
-<?php
-    require_once "./../config/dbConnection.php";
-    
+<?php    
     //Ajouter un client
     function ajouterClient($nom, $prenom, $age, $login, $mot_de_passe){
         global $pdo;

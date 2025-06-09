@@ -5,7 +5,7 @@
         "nom": "Jonh doe",
         "motDePasse": "12345678",
         "email": "julie@yahoo.com",
-        "role":"Administrateur"
+        "role":1
         },
         
         {
@@ -13,7 +13,7 @@
         "name": "James Williams",
         "motDePasse": "00000000",
         "email": "jameswilly@gmail.com",
-        "role":"Client"
+        "role":2
 
         }
     ],
@@ -23,31 +23,39 @@
             "id": 1,
             "titre": "Administrateur",
             "permissions": [
-                "ajouter_utilisateur",
-                "modifier_utilisateur",
-                "supprimer_utilisateur",
-                "voir_utilisateurs",
-                "ajouter_article",
-                "modifier_article",
-                "supprimer_article",
-                "voir_articles"
+                "Ajouter_Hotel",
+                "Modifier_Hotel",
+                "Archiver_Hotel",
+                "Bloquer_Hotel",
+                "Debloquer_Hotel",
+                "voir_clients"
             ]
         },
         {
             "id": 2,
             "titre": "Gestionnaire",
             "permissions": [
-                "ajouter_article",
-                "modifier_article",
-                "supprimer_article",
-                "voir_articles"
+                "Ajouter_chambres",
+                "lister_chambres",
+                "lister_categories",
+                "lister_reservations",
+                "voir_clients_reserve",
+                "filtrer_reservations_etat",
+                "faire_reservation_client",
+                "Enregistrer_reservations",
+                "Archiver_reservation",
+                "Valider_locations"
             ]
         },
         {
             "id": 3,
             "titre": "Client",
             "permissions": [
-                "voir_articles"
+                "supprimer_compte",
+                "Modifier_compte",
+                "lister_reservations",
+                "Annuler_reservation",
+                "valider_reservation"
             ]
         }
     ]
