@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 29 mai 2025 à 19:44
+-- Généré le : mar. 10 juin 2025 à 01:07
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -30,14 +30,14 @@ SET time_zone = "+00:00";
 CREATE TABLE `categorie` (
   `id` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `prix_nuité` double NOT NULL
+  `prix_nuit` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `categorie`
 --
 
-INSERT INTO `categorie` (`id`, `description`, `prix_nuité`) VALUES
+INSERT INTO `categorie` (`id`, `description`, `prix_nuit`) VALUES
 (1, 'Chambre Simple', 50000),
 (2, 'Chambre Double', 80000),
 (3, 'Suite Junior', 120000),
@@ -56,19 +56,20 @@ CREATE TABLE `chambre` (
   `numero_fixe` varchar(15) NOT NULL,
   `description` text NOT NULL,
   `id_categorie_fk` int(11) NOT NULL,
-  `id_hotel_fk` int(11) NOT NULL
+  `id_hotel_fk` int(11) NOT NULL,
+  `status` enum('libre','occupe') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `chambre`
 --
 
-INSERT INTO `chambre` (`id`, `num_chambre`, `numero_fixe`, `description`, `id_categorie_fk`, `id_hotel_fk`) VALUES
-(1, '101', '0123456789', 'Chambre simple avec vue sur jardin', 1, 1),
-(2, '102', '0123456790', 'Chambre double, balcon', 2, 1),
-(3, '201', '0123456791', 'Suite junior, étage élevé', 3, 1),
-(4, '202', '0123456792', 'Chambre familiale, deux lits doubles', 5, 1),
-(5, '301', '0123456793', 'Suite luxe, terrasse privée', 4, 1);
+INSERT INTO `chambre` (`id`, `num_chambre`, `numero_fixe`, `description`, `id_categorie_fk`, `id_hotel_fk`, `status`) VALUES
+(1, '101', '0123456789', 'Chambre simple avec vue sur jardin', 1, 1, 'libre'),
+(2, '102', '0123456790', 'Chambre double, balcon', 2, 1, 'libre'),
+(3, '201', '0123456791', 'Suite junior, étage élevé', 3, 1, 'libre'),
+(4, '202', '0123456792', 'Chambre familiale, deux lits doubles', 5, 1, 'libre'),
+(5, '301', '0123456793', 'Suite luxe, terrasse privée', 4, 1, 'libre');
 
 -- --------------------------------------------------------
 
@@ -184,11 +185,11 @@ CREATE TABLE `reservation` (
 --
 
 INSERT INTO `reservation` (`id`, `id_client_fk`, `status`, `mode_paiement`, `date_limite`, `date_deb`, `date_fin`, `cout_total`, `id_chambre_fk`, `id_prestation_fk`) VALUES
-(1, 1, 'en attente', 'carte bancaire', '2025-06-10', '2025-07-01', '2025-07-05', 350, 2, 1),
-(2, 2, 'valider', 'espece', '2025-06-15', '2025-08-10', '2025-08-15', 500, 3, 2),
-(3, 3, 'annuler', 'cheque', '2025-06-20', '2025-09-01', '2025-09-03', 180, 1, NULL),
-(4, 1, 'valider', 'carte bancaire', '2025-06-12', '2025-07-10', '2025-07-12', 220, 4, 3),
-(5, 4, 'archiver', 'espece', '2025-06-18', '2025-07-20', '2025-07-25', 600, 2, NULL);
+(19, 2, 'en attente', 'espece', '2025-05-30', '2025-06-04', '2025-06-08', 482000, 3, 1),
+(20, 2, 'en attente', 'carte bancaire', '2025-06-01', '2025-06-06', '2025-06-08', 102000, 1, 1),
+(21, 5, 'valider', 'carte bancaire', '2025-06-03', '2025-06-08', '2025-06-18', 503500, 1, 2),
+(22, 2, 'en attente', 'carte bancaire', '2025-06-03', '2025-06-08', '2025-06-19', 552000, 1, 1),
+(23, 2, 'en attente', 'carte bancaire', '2025-06-03', '2025-06-08', '2025-06-11', 153500, 1, 2);
 
 --
 -- Index pour les tables déchargées
@@ -285,7 +286,7 @@ ALTER TABLE `prestation`
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Contraintes pour les tables déchargées
