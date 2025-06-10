@@ -84,4 +84,12 @@
 
         return $stmt->fetchAll();
     }
+    // vous m'avez fait losse j'ai chercher la fonction la portout c'est a 03h11 que je viens de trouver
+    function getAllClients() {
+        global $pdo;
+        $sql = "SELECT * FROM client";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
