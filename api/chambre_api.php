@@ -15,7 +15,9 @@ switch ($method) {
         // Récupérer toutes les chambres ou seulement les disponibles
         if (isset($_GET['dispo']) && $_GET['dispo'] == 1) {
             $chambres = handleGetChambreDispo();
-        } else {
+        }elseif(isset($_GET['dispo']) && $_GET['dispo'] == 0){
+            $chambres = handleGetChambreNonDispo();
+        }else {
             $chambres = handleGetChambre();
         }
         echo json_encode($chambres);
