@@ -25,7 +25,7 @@ afficherSpinner();
 const MIN_SPINNER_TIME = 2000; // 2 secondes
 const startTime = Date.now();
 
-fetch('http://localhost/projet-php/api/reservation_api.php')
+fetch('http://localhost/gestionhotelerie/api/reservation_api.php')
   .then(response => response.json())
   .then(reservations => {
     const elapsed = Date.now() - startTime;

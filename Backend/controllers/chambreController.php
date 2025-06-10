@@ -20,6 +20,12 @@ function handleGetChambreDispo() {
     return getChambreDispo($pdo);
 }
 
+// Récupérer les chambres non disponibles
+function handleGetChambreNonDispo() {
+    global $pdo;
+    return getChambreNonDispo($pdo);
+}
+
 // Modifier une chambre
 function handleModifierChambre($idChambre, $numero_fixe, $description, $id_categorie_fk, $id_hotel_fk, $disponibilite) {
     global $pdo;
