@@ -34,23 +34,6 @@
     </form>
   </div>
 
-  <script>
-    const apiUrl = "http://localhost:8080/Projet-PHP/Gestion_Hotel/api/client_api.php";
-
-    document.getElementById("addForm").addEventListener("submit", e => {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(e.target));
-      fetch(apiUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      })
-      .then(res => res.json())
-      .then(res => {
-        if (res.id) window.location.href = "indexClient.html";
-        else alert("Erreur !");
-      });
-    });
-  </script>
+  <script src="js/Client.js"></script>
 </body>
 </html>
