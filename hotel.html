@@ -1,44 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/hotelStyle.css" />
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>HotelGod</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   </head>
-  <body>
-    <header>
-      <!-- navbar et logo -->
-      <img src="" alt="logo" />
-      <nav>
-        <a href="chambre.html">Chambres</a>
-        <a href="dashboard.html">Tableau de bord</a>
-        <a href="gestionnaire.html">Gestionnaire</a>
-        <a href="ajouter_reservation.html">Reservations</a>
-      </nav>
-    </header>
-    <!-- 1er section  -->
-    <section id="hotel">
-      <p>Nom de l'Hotel :</p>
-      <!-- recuprer le nom de lhotel depuis la bd  -->
-    </section>
+  <body class="bg-slate-50 min-h-screen">
+    <div class="flex min-h-screen">
+      <!-- Sidebar -->
+      <aside class="w-72 bg-white border-r border-slate-100 flex flex-col justify-between py-8 px-6 shadow-md">
+        <div class="layout-content-container flex flex-col w-80">
+            <!-- Sidebar identique -->
+            <div class="fixed top-0 left-0 h-screen w-80 bg-gradient-to-b from-green-600 via-green-400 to-green-200 border-r border-slate-100 flex flex-col justify-between py-8 px-6 shadow-lg z-20">
+                <div>
+                    <div class="flex h-full flex-col justify-between bg-transparent p-4">
+                        <div class="flex flex-col gap-4">
+                            <h1 class="text-white text-2xl font-extrabold leading-normal tracking-wide drop-shadow">HotelGod</h1>
+                            <div class="flex flex-col gap-2 navigation">
+                                <!-- Ajouter les navigations -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <span class="text-xs text-white/80">&copy; 2025 HotelGod</span>
+                </div>
+            </div>
+        </div>
+      </aside>
 
-    <!-- 2eme section -->
-    <section id="chambre">
-      <p>Nombre de chambres et chambres libres :</p>
-      <!-- recuprer le nombre de chambres libre et total depuis la bd -->
-    </section>
+      <!-- Main content -->
+      <main class="flex-1 flex items-center justify-center">
+        <div class="max-w-xl w-full bg-white rounded-2xl shadow-lg px-8 py-10 flex flex-col items-center">
+          <img alt="Avatar Hôtel" class="w-24 h-24 rounded-full bg-slate-200 object-cover mb-6 border-4 border-slate-50 shadow" id="hotel-image"/>
+          <div class="text-3xl font-bold text-slate-900 mb-2 text-center" id="hotel-name">Nom de l'Hôtel</div>
+          <div class="w-full mt-6 mb-6">
+            <div class="flex justify-between items-center py-4 border-b border-slate-100 text-base">
+              <span class="text-slate-500 font-medium">Nombre de chambres</span>
+              <span class="text-blue-600 font-semibold" id="total-chambres">--</span>
+            </div>
+            <div class="flex justify-between items-center py-4 border-b border-slate-100 text-base">
+              <span class="text-slate-500 font-medium">Chambres libres</span>
+              <span class="text-blue-600 font-semibold" id="chambres-libres">--</span>
+            </div>
+            <div class="flex justify-between items-center py-4 text-base">
+              <span class="text-slate-500 font-medium">Nombre de clients actuels</span>
+              <span class="text-blue-600 font-semibold" id="nb-clients">--</span>
+            </div>
+          </div>
 
-    <!-- 3eme section -->
-    <section id="clients">
-      <p>Nombre de clients actuelle :</p>
-      <!-- recuprer le nombre de clients dans la bd  -->
-    </section>
+          <!-- Prestations disponibles -->
+          <div class="w-full mb-6">
+            <div class="flex justify-between items-center py-4 border-b border-slate-100 text-base">
+              <span class="text-slate-500 font-medium">Prestations disponibles</span>
+              <span class="text-blue-600 font-semibold" id="prestations-disponibles">--</span>
+            </div>
+          </div>
 
-    <a href="hotelInfoModif.html">
-      <button>Modifier info</button>
-    </a>
+          <!-- Types de chambres à disposition -->
+          <div class="w-full mb-6">
+            <div class="flex justify-between items-center py-4 border-b border-slate-100 text-base">
+              <span class="text-slate-500 font-medium">Types de chambres à disposition</span>
+              <span class="text-blue-600 font-semibold" id="types-chambres">--</span>
+            </div>
+          </div>
 
-    <script src="js/hotel.js"></script>
+          <!-- Adresse -->
+          <div class="w-full mb-4 flex justify-between items-center py-2 border-b border-slate-100 text-base">
+            <span class="text-slate-500 font-medium">Adresse</span>
+            <span class="text-blue-600 font-semibold" id="hotel-address">Adresse de l'Hôtel</span>
+          </div>
+
+          <!-- Pays -->
+          <div class="w-full mb-4 flex justify-between items-center py-2 border-b border-slate-100 text-base">
+            <span class="text-slate-500 font-medium">Pays</span>
+            <span class="text-blue-600 font-semibold" id="hotel-country">Pays de l'Hôtel</span>
+          </div>
+
+          
+
+          <a href="hotelInfoModif.html" class="w-full flex justify-center">
+            <button class="mt-4 bg-gradient-to-r from-green-600 to-green-800 text-white font-medium py-3 px-8 rounded-xl shadow hover:from-green-700 hover:to-green-900 transition">
+              Modifier les informations
+            </button>
+          </a>
+        </div>
+      </main>
+    </div>
+    <script src="js/main.js"></script>
+    <script src="js/hotel.js" type="module"></script>
   </body>
 </html>

@@ -50,22 +50,17 @@
     }
 
     //Recuperer Chambre dispo
-    function getChambreDispo(PDO $pdo){
-        $SQL_SELECT_CHAMBRE = "SELECT * FROM chambre INNER JOIN categorie c ON c.id = chambre.id_categorie_fk where status=1";
-        $stmt = $pdo->query($SQL_SELECT_CHAMBRE);
+    function getChambreDispo(PDO $pdo, $dispo){
+        $SQL_SELECT_CHAMBRE = "SELECT * FROM chambre INNER JOIN categorie c ON c.id = chambre.id_categorie_fk where status=?";
+        
+        $stmt = $pdo->prepare($SQL_SELECT_CHAMBRE);
+        $stmt->execute([$dispo]);
         $allChambres = $stmt->fetchAll();
+        
 
         return $allChambres;
     }
     
-    //Recuperer Chambre non dispo
-    function getChambreNonDispo(PDO $pdo){
-        $SQL_SELECT_CHAMBRE = "SELECT * FROM chambre INNER JOIN categorie c ON c.id = chambre.id_categorie_fk where status=0";
-        $stmt = $pdo->query($SQL_SELECT_CHAMBRE);
-        $allChambres = $stmt->fetchAll();
-
-        return $allChambres;
-    }
 
     //Modifier une chambre
     function modifierChambre(PDO $pdo, $idChambre,$numero_fixe, $description, $id_categorie_fk, $id_hotel_fk, $disponibilite){

@@ -1,12 +1,12 @@
 Array
 (
-    [id_chambre_fk] => 1
-    [id_prestation_fk] => 
-    [date_deb] => 2025-06-08
-    [date_fin] => 2025-06-05
-    [mode_paiement] => carte bancaire
-    [cout_total] => 
+    [id_chambre_fk] => 2
+    [id_prestation_fk] => 2
+    [date_deb] => 2025-06-11
+    [date_fin] => 2025-06-26
+    [mode_paiement] => espece
+    [cout_total] => 1203500
     [status] => en attente
-    [id_client_fk] => 2
-    [date_limite] => 2025-06-03
+    [id_client_fk] => 1
+    [date_limite] => 2025-06-06
 )

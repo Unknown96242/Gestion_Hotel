@@ -1,21 +1,33 @@
 <?php
-//lister les reservations par le client
+// Lister toutes les réservations avec infos client, chambre et prestation
 function ListerAllReservation(PDO $pdo) {
     $sql = "SELECT 
                 reservation.id AS reservation_id,
                 client.id AS client_id,
-                reservation.*,
                 client.nom AS client_nom,
-                client.prenom AS client_prenom
+                client.prenom AS client_prenom,
+                chambre.id AS chambre_id,
+                chambre.num_chambre AS chambre_numero,
+                chambre.description AS chambre_description,
+                prestation.id AS prestation_id,
+                prestation.description AS prestation_description,
+                reservation.* 
             FROM reservation
-            INNER JOIN client ON client.id = reservation.id_client_fk";
+            INNER JOIN client ON client.id = reservation.id_client_fk
+            INNER JOIN chambre ON chambre.id = reservation.id_chambre_fk
+            LEFT JOIN prestation ON prestation.id = reservation.id_prestation_fk";
     $stmt = $pdo->query($sql);
-    $reservation = $stmt->fetchAll();
-    return $reservation;
+    return $stmt->fetchAll();
 }
 //recuperer une reservation par son id
-function ListerReservationById(PDO $pdo, $id) {
-    $sql = "SELECT*FROM reservation INNER JOIN client ON client.id = reservation.id_client_fk WHERE reservation.id=?";
+function ListerOnReservationById(PDO $pdo, $id) {
+    $sql = "SELECT reservation.*, 
+                   client.nom, client.prenom, client.age, client.login, client.mot_de_passe,
+                   chambre.id AS chambre_id, chambre.num_chambre, chambre.description AS chambre_description
+            FROM reservation
+            INNER JOIN client ON client.id = reservation.id_client_fk
+            INNER JOIN chambre ON chambre.id = reservation.id_chambre_fk
+            WHERE reservation.id = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$id]);
     return $stmt->fetch();

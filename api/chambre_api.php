@@ -13,10 +13,8 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
     case 'GET':
         // Récupérer toutes les chambres ou seulement les disponibles
-        if (isset($_GET['dispo']) && $_GET['dispo'] == 1) {
-            $chambres = handleGetChambreDispo();
-        }elseif(isset($_GET['dispo']) && $_GET['dispo'] == 0){
-            $chambres = handleGetChambreNonDispo();
+        if (isset($_GET['status'])) {
+            $chambres = handleGetChambreDispo($_GET['status']);
         }else {
             $chambres = handleGetChambre();
         }

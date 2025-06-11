@@ -84,4 +84,11 @@
 
         return $stmt->fetchAll();
     }
+    function getAllClients() {
+        global $pdo;
+        $sql = "SELECT * FROM client";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 

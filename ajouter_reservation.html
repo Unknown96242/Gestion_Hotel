@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+        href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" />
+    <title>Ajouter une réservation</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body>
+    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
+        style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
+        <div class="layout-container flex h-full grow flex-col">
+            <div class="gap-1 px-6 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col w-80">
+                    <!-- Sidebar identique -->
+                    <div class="fixed top-0 left-0 h-screen w-80 bg-gradient-to-b from-green-600 via-green-400 to-green-200 border-r border-slate-100 flex flex-col justify-between py-8 px-6 shadow-lg z-20">
+                        <div>
+                            <div class="flex h-full flex-col justify-between bg-transparent p-4">
+                                <div class="flex flex-col gap-4">
+                                    <h1 class="text-white text-2xl font-extrabold leading-normal tracking-wide drop-shadow">HotelGod</h1>
+                                    <div class="flex flex-col gap-2 navigation">
+                                        <!-- Ajouter les navigations -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-10">
+                            <span class="text-xs text-white/80">&copy; 2025 HotelGod</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Contenu principal -->
+                <div class="layout-content-container flex flex-col max-w-4xl w-full flex-1 mx-auto">
+                    <div class="flex flex-wrap justify-between gap-3 p-4">
+                        <p class="text-[#121516] tracking-light text-[32px] font-bold leading-tight min-w-72">
+                            Ajouter une réservation
+                        </p>
+                    </div>
+                    <form id="form-ajout-reservation" class="bg-white rounded-xl shadow p-8 max-w-3xl w-full mx-auto space-y-6 border border-[#dde1e3]">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-[#121516] font-medium mb-1">Client</label>
+                                <input name="nom_client" id="client-input" list="clients-list" required class="form-input w-full rounded-xl border border-[#dde1e3] px-4 py-2" placeholder="Nom du client">
+                                <datalist id="clients-list"></datalist>
+                            </div>
+                            <div>
+                                <label class="block text-[#121516] font-medium mb-1">Chambre</label>
+                                <select name="id_chambre_fk" id="chambre-select" required class="form-select w-full rounded-xl border border-[#dde1e3] px-4 py-2"></select>
+                            </div>
+                            <div>
+                                <label class="block text-[#121516] font-medium mb-1">Prestation souhaitée</label>
+                                <select name="id_prestation_fk" id="prestation-select" class="form-select w-full rounded-xl border border-[#dde1e3] px-4 py-2">
+                                    <option value="">Aucune</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[#121516] font-medium mb-1">Date de début</label>
+                                <input type="date" name="date_deb" required class="form-input w-full rounded-xl border border-[#dde1e3] px-4 py-2">
+                            </div>
+                            <div>
+                                <label class="block text-[#121516] font-medium mb-1">Date de fin</label>
+                                <input type="date" name="date_fin" required class="form-input w-full rounded-xl border border-[#dde1e3] px-4 py-2">
+                            </div>
+                            <div>
+                                <label class="block text-[#121516] font-medium mb-1">Mode de paiement</label>
+                                <select name="mode_paiement" required class="form-select w-full rounded-xl border border-[#dde1e3] px-4 py-2">
+                                    <option value="">Sélectionner</option>
+                                    <option value="carte bancaire">Carte bancaire</option>
+                                    <option value="espece">Espèce</option>
+                                    <option value="cheque">Chèque</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[#121516] font-medium mb-1">Coût total</label>
+                                <input type="number" name="cout_total" required min="0" readonly class="form-input w-full rounded-xl border border-[#dde1e3] px-4 py-2" placeholder="Montant en FCFA">
+                            </div>
+                            <div>
+                                <label class="block text-[#121516] font-medium mb-1">Statut</label>
+                                <select name="status" required class="form-select w-full rounded-xl border border-[#dde1e3] px-4 py-2">
+                                    <option value="en attente">En attente</option>
+                                    <option value="valider">Validée</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="flex justify-end pt-4">
+                            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-6 rounded-xl transition-colors duration-200">
+                                Ajouter la réservation
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Toast flottant -->
+    
+    <div id="toast-message"></div>
+    
+    <script src="./js/ajouter_reservation.js" type="module"></script>
+    <script src="./js/main.js" type="module"></script>
+</body>
+</html>

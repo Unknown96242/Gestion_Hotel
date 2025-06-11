@@ -1,3 +1,4 @@
+import { RACINE } from "./config_general.js";
 import { showToast } from  "./utils.js";
 
 let chambresData = [];
@@ -8,7 +9,7 @@ let clientsData = [];
 // Remplir les listes déroulantes dynamiquement
 document.addEventListener('DOMContentLoaded', () => {
     // Charger les clients
-    fetch('http://localhost/projet-php/api/client_api.php')
+    fetch(`http://localhost/${RACINE}/api/client_api.php`)
         .then(res => res.json())
         .then(response => {
             // Si l'API retourne { data: [...] }
@@ -26,14 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // Charger les catégories
-    fetch('http://localhost/projet-php/api/categorie_api.php')
+    fetch(`http://localhost/${RACINE}/api/categorie_api.php`)
         .then(res => res.json())
         .then(categories => {
             categoriesData = categories; // Stocke toutes les catégories
         });
 
     // Charger les chambres
-    fetch('http://localhost/projet-php/api/chambre_api.php')
+    fetch(`http://localhost/${RACINE}/api/chambre_api.php`)
         .then(res => res.json())
         .then(chambres => {
             chambresData = chambres; // Stocke toutes les chambres
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // Charger les prestations
-    fetch('http://localhost/projet-php/api/prestation_api.php')
+    fetch(`http://localhost/${RACINE}/api/prestation_api.php`)
         .then(res => res.json())
         .then(prestations => {
             prestationsData = prestations; // Stocke toutes les prestations
@@ -169,7 +170,7 @@ document.getElementById('form-ajout-reservation').addEventListener('submit', fun
 
     console.log(data);
 
-    fetch('http://localhost/projet-php/api/reservation_api.php', {
+    fetch(`http://localhost/${RACINE}/api/reservation_api.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)

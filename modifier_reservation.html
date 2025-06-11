@@ -20,25 +20,30 @@
             <div class="gap-1 px-6 flex flex-1 justify-center py-5">
                 <div class="layout-content-container flex flex-col w-80">
                     <!-- Sidebar identique -->
-                    <div class="layout-content-container flex flex-col w-80 ">
-                        <div class="flex h-full min-h-[700px] flex-col justify-between bg-white p-4">
-                            <div class="flex flex-col gap-4">
-                                <h1 class="text-[#121516] text-base font-medium leading-normal">Admin Panel</h1>
-                                <div class="flex flex-col gap-2 navigation">
-                                    <!-- Ajouter les navigations -->
+                    <div class="fixed top-0 left-0 h-screen w-80 bg-gradient-to-b from-green-600 via-green-400 to-green-200 border-r border-slate-100 flex flex-col justify-between py-8 px-6 shadow-lg z-20">
+                        <div>
+                            <div class="flex h-full flex-col justify-between bg-transparent p-4">
+                                <div class="flex flex-col gap-4">
+                                    <h1 class="text-white text-2xl font-extrabold leading-normal tracking-wide drop-shadow">HotelGod</h1>
+                                    <div class="flex flex-col gap-2 navigation">
+                                        <!-- Ajouter les navigations -->
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="mt-10">
+                            <span class="text-xs text-white/80">&copy; 2025 HotelGod</span>
                         </div>
                     </div>
                 </div>
                 <!-- contenu principal -->
                  <div
-                class="relative flex size-full min-h-screen flex-col bg-[#f8fbfa] group/design-root overflow-x-hidden"
+                class="ml-80 min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-yellow-50 flex items-center justify-center py-10"
                 style="--select-button-svg: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2724px%27 height=%2724px%27 fill=%27rgb(81,148,107)%27 viewBox=%270 0 256 256%27%3e%3cpath d=%27M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z%27%3e%3c/path%3e%3c/svg%3e'); font-family: Inter, &quot;Noto Sans&quot;, sans-serif;">
                 <div class="layout-container flex h-full grow flex-col">
                     
                     <div class="px-40 flex flex-1 justify-center py-5">
-                    <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1" id="form-modifier-reservation">
+                    <form class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1" id="form-modifier-reservation">
                         <div class="flex flex-wrap justify-between gap-3 p-4">
                         <p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight min-w-72">Modifier la réservation</p>
                         </div>
@@ -103,6 +108,8 @@
                             <select
                             class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1a13] focus:outline-0 focus:ring-0 border border-[#d1e6d9] bg-[#f8fbfa] focus:border-[#d1e6d9] h-14 bg-[image:--select-button-svg] placeholder:text-[#51946b] p-[15px] text-base font-normal leading-normal" id="statut-select"
                             >
+                            <option value="en attente">En attente</option>
+                            <option value="valider">Validée</option>
                             <
                             </select>
                         </label>
@@ -113,20 +120,23 @@
                             <select
                             class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1a13] focus:outline-0 focus:ring-0 border border-[#d1e6d9] bg-[#f8fbfa] focus:border-[#d1e6d9] h-14 bg-[image:--select-button-svg] placeholder:text-[#51946b] p-[15px] text-base font-normal leading-normal"  id="mode-paiement-select"
                             >
-                            <option value="one"></option>
-                            <option value="two">two</option>
-                            <option value="three">three</option>
+                            <option value="">Sélectionner</option>
+                            <option value="carte bancaire">Carte bancaire</option>
+                            <option value="espece">Espèce</option>
+                            <option value="cheque">Chèque</option>
                             </select>
                         </label>
                         <div class="flex justify-stretch">
                         <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-end">
                             <button
-                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#e8f2ec] text-[#0e1a13] text-sm font-bold leading-normal tracking-[0.015em]"
+                            type="button"
+                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-red-100 text-red-700 text-sm font-bold leading-normal tracking-[0.015em]"
+                            id="btn-annuler"
                             >
                             <span class="truncate">Annuler</span>
                             </button>
                             <button
-                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#39e079] text-[#0e1a13] text-sm font-bold leading-normal tracking-[0.015em]"
+                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#39e079] text-[#0e1a13] text-sm font-bold leading-normal tracking-[0.015em]" type="submit"
                             >
                             <span class="truncate">Enregistrer les modifications</span>
                             </button>
@@ -135,7 +145,7 @@
                         </div>
                         </div>
                         
-                    </div>
+                    </form>
                     </div>
                 </div>
                 </div>

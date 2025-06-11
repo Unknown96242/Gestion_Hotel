@@ -16,16 +16,32 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'GET':
+
         // Lister les réservations
-        if (isset($_GET['id_client_fk']) && isset($_GET['status'])) {
+        $reservations = [];
+        if(isset($_GET['id'])) {
+            // Récupérer une réservation par son ID
+            $id = $_GET['id'];
+            $reservation = ListerReservationById($pdo, $id);
+            if ($reservation) {
+                $reservations = [$reservation]; // Mets la réservation dans un tableau
+            } else {
+                $reservations = []; // Aucun résultat
+            }
+            
+            // echo json_encode($reservations);
+            // exit;
+            
+            }elseif (isset($_GET['id_client_fk']) && isset($_GET['status'])) {
             // Lister les réservations par client et statut
             $id_client_fk = $_GET['id_client_fk'];
             $status = $_GET['status'];
             $reservations = ListerReservationByClientAndStatusOrS($pdo, $id_client_fk, $status);
-            echo json_encode($reservations);
-            exit;
-        }
-        $reservations = ListerReservation($pdo);
+            // echo json_encode($reservations);
+            // exit;
+            }else{
+                 $reservations = ListerReservation($pdo);
+            }
         echo json_encode($reservations);
         break;
 
@@ -71,8 +87,17 @@ switch ($method) {
 
     case 'PUT':
         // Modifier une réservation existante
-        parse_str(file_get_contents("php://input"), $_PUT);
-        if (!isset($_PUT['id_client_fk']) || !isset($_PUT['mode_paiement']) || !isset($_PUT['date_limite']) || !isset($_PUT['date_deb']) || !isset($_PUT['date_fin']) || !isset($_PUT['cout_total']) || !isset($_PUT['id_chambre']) || !isset($_PUT['id_prestation_fk']) ) {
+        $_PUT = json_decode(file_get_contents("php://input"), true);
+        if (
+            !isset($_PUT['id_client_fk']) ||
+            !isset($_PUT['mode_paiement']) ||
+            !isset($_PUT['date_limite']) ||
+            !isset($_PUT['date_deb']) ||
+            !isset($_PUT['date_fin']) ||
+            !isset($_PUT['cout_total']) ||
+            !isset($_PUT['id_chambre_fk']) ||      // <-- Correction ici
+            !isset($_PUT['id_prestation_fk'])
+        ) {
             if (!isset($_PUT['id']) || !isset($_PUT['status'])) {
                 http_response_code(400); // Mauvaise requête
                 echo json_encode(["error" => "Paramètres manquants"]);
@@ -80,9 +105,25 @@ switch ($method) {
             }
             $result = ModifierStatutReservation($pdo, $_PUT['id'], $_PUT['status']);
         }else {
-            $result = updateReservation($pdo, $_PUT['id'], $_PUT['id_client_fk'], $_PUT['status'], $_PUT['mode_paiement'], $_PUT['date_limite'], $_PUT['date_deb'], $_PUT['date_fin'], $_PUT['cout_total'], $_PUT['id_chambre'], $_PUT['id_prestation_fk']);
+            $result = updateReservation(
+                $pdo,
+                $_PUT['id'],
+                $_PUT['id_client_fk'],
+                $_PUT['status'],
+                $_PUT['mode_paiement'],
+                $_PUT['date_limite'],
+                $_PUT['date_deb'],
+                $_PUT['date_fin'],
+                $_PUT['cout_total'],
+                $_PUT['id_chambre_fk'],                // <-- Correction ici
+                $_PUT['id_prestation_fk']
+            );
         }
-        echo json_encode($result);
+        if ($result) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Erreur lors de la modification']);
+        }
         break;
 
     case 'DELETE':

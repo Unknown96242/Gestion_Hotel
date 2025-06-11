@@ -18,14 +18,19 @@
             <div class="gap-1 px-6 flex flex-1 justify-center py-5">
                 <div class="layout-content-container flex flex-col w-80">
                     <!-- Sidebar identique -->
-                    <div class="layout-content-container flex flex-col w-80 ">
-                        <div class="flex h-full min-h-[700px] flex-col justify-between bg-white p-4">
-                            <div class="flex flex-col gap-4">
-                                <h1 class="text-[#121516] text-base font-medium leading-normal">Admin Panel</h1>
-                                <div class="flex flex-col gap-2 navigation">
-                                    <!-- Ajouter les navigations -->
+                    <div class="fixed top-0 left-0 h-screen w-80 bg-gradient-to-b from-green-600 via-green-400 to-green-200 border-r border-slate-100 flex flex-col justify-between py-8 px-6 shadow-lg z-20">
+                        <div>
+                            <div class="flex h-full flex-col justify-between bg-transparent p-4">
+                                <div class="flex flex-col gap-4">
+                                    <h1 class="text-white text-2xl font-extrabold leading-normal tracking-wide drop-shadow">HotelGod</h1>
+                                    <div class="flex flex-col gap-2 navigation">
+                                        <!-- Ajouter les navigations -->
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="mt-10">
+                            <span class="text-xs text-white/80">&copy; 2025 HotelGod</span>
                         </div>
                     </div>
                 </div>
@@ -102,7 +107,6 @@
                                 </thead>
                                 <tbody id="reservation-table-body">
                                     <!-- Les lignes de la table seront insérées ici par JavaScript -->
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -145,12 +149,6 @@
 
                             @container(max-width:840px) {
                                 .table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-840 {
-                                    display: none;
-                                }
-                            }
-
-                            @container(max-width:960px) {
-                                .table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-960 {
                                     display: none;
                                 }
                             }

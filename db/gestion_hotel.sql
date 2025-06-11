@@ -123,7 +123,7 @@ CREATE TABLE `hotel` (
   `nom_hotel` varchar(50) NOT NULL,
   `nombres_chambres` int(11) NOT NULL,
   `pays` varchar(50) NOT NULL,
-  `addresse` varchar(100) NOT NULL,
+  `adresse` varchar(100) NOT NULL,
   `image_hotel` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -131,7 +131,7 @@ CREATE TABLE `hotel` (
 -- Déchargement des données de la table `hotel`
 --
 
-INSERT INTO `hotel` (`id`, `nom_hotel`, `nombres_chambres`, `pays`, `addresse`, `image_hotel`) VALUES
+INSERT INTO `hotel` (`id`, `nom_hotel`, `nombres_chambres`, `pays`, `adresse`, `image_hotel`) VALUES
 (1, 'Hôtel du Parc', 50, 'Senegal', '12 rue Mamadou sy, 75001 Dakar', 'hotel_parc.jpg'),
 (2, 'Sunset Resort', 120, 'Espagne', 'Avenida del Mar, 08002 Barcelone', 'sunset_resort.jpg'),
 (3, 'Royal Palace', 80, 'Maroc', 'Boulevard Hassan II, Casablanca', 'royal_palace.jpg'),

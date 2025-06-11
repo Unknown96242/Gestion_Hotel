@@ -7,11 +7,15 @@ function handleListerPrestation() {
     global $pdo;
     return ListerPrestation($pdo);
 }
+function handleListerPrestationId($id) {
+    global $pdo;
+    return ListerPrestationId($pdo, $id);
+}
 
 // Créer une prestation
-function handleCreatePrestation($id, $prix, $description) {
+function handleCreatePrestation($prix, $description) {
     global $pdo;
-    return createPrestation($pdo, $id, $prix, $description);
+    return createPrestation($pdo, $prix, $description);
 }
 
 // Modifier une prestation

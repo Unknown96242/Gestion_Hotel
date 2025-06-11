@@ -1,41 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <header>
-      <!-- navbar et logo -->
-      <img src="" alt="logo" />
-      <nav>
-        <a href="chambre.html">Chambres</a>
-        <a href="dashboard.html">Tableau de bord</a>
-        <a href="gestionnaire.html">Gestionnaire</a>
-        <a href="ajouter_reservation.html">Reservations</a>
-      </nav>
-    </header>
-    <main>
-      <p>Modifier les informations de l'Hotel</p>
-      <hr />
-      <form action="" method="post" id="form">
-        <label for="nom">Nom de l’hôtel :</label><br />
-        <input type="text" id="nom" name="nom" value="" required /><br /><br />
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modifier les informations de l'hôtel</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <style>
+    body { font-family: 'Inter', 'Noto Sans', Arial, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+  <div class="flex min-h-screen">
+      <!-- Sidebar -->
+      <aside class="w-72 bg-white border-r border-slate-100 flex flex-col justify-between py-8 px-6 shadow-md">
+        <div class="layout-content-container flex flex-col w-80">
+            <!-- Sidebar identique -->
+            <div class="fixed top-0 left-0 h-screen w-80 bg-gradient-to-b from-green-600 via-green-400 to-green-200 border-r border-slate-100 flex flex-col justify-between py-8 px-6 shadow-lg z-20">
+                <div>
+                    <div class="flex h-full flex-col justify-between bg-transparent p-4">
+                        <div class="flex flex-col gap-4">
+                            <h1 class="text-white text-2xl font-extrabold leading-normal tracking-wide drop-shadow">HotelGod</h1>
+                            <div class="flex flex-col gap-2 navigation">
+                                <!-- Ajouter les navigations -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <span class="text-xs text-white/80">&copy; 2025 HotelGod</span>
+                </div>
+            </div>
+        </div>
+      </aside>
 
-        <label for="chambre">Nombres de chambres :</label><br />
-        <input
-          type="number"
-          id="chambre"
-          name="chambre"
-          value=""
-          required
-        /><br /><br />
+    <!-- Main content -->
+    <main class="flex-1 flex items-center justify-center">
+      <div class="max-w-lg w-full bg-white rounded-2xl shadow-lg px-8 py-10 flex flex-col items-center">
+        <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Modifier les informations de l'hôtel</h2>
+        <form id="form" class="w-full space-y-6">
+          <div>
+            <label for="nom" class="block text-slate-700 font-medium mb-1">Nom de l’hôtel</label>
+            <input type="text" id="nom" name="nom" required
+              class="form-input w-full rounded-lg border border-[#d1e6d9] bg-[#f8fbfa] h-12 px-4 text-base" />
+          </div>
+          <div>
+            <label for="adresse" class="block text-slate-700 font-medium mb-1">Adresse</label>
+            <input type="text" id="adresse" name="adresse" required
+              class="form-input w-full rounded-lg border border-[#d1e6d9] bg-[#f8fbfa] h-12 px-4 text-base" />
+          </div>
+          <div>
+            <label for="pays" class="block text-slate-700 font-medium mb-1">Pays</label>
+            <input type="text" id="pays" name="pays" required
+              class="form-input w-full rounded-lg border border-[#d1e6d9] bg-[#f8fbfa] h-12 px-4 text-base" />
+          </div>
+          <div>
+            <label for="image" class="block text-slate-700 font-medium mb-1">Image de l'hôtel</label>
+            <input type="file" id="image" name="image"
+              accept="image/*"
+              class="block w-full text-base text-slate-700 file:mr-4 file:py-2 file:px-4
+                     file:rounded-lg file:border-0 file:text-sm file:font-semibold
+                     file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+            <div class="mt-3 flex justify-center">
+              <img id="image-preview" src="" alt="Aperçu de l'image" class="max-h-32 rounded-lg shadow hidden" />
+            </div>
+          </div>
+          <div>
+            <label for="chambre" class="block text-slate-700 font-medium mb-1">Nombre de chambres</label>
+            <input type="number" id="chambre" name="chambre" required
+              class="form-input w-full rounded-lg border border-[#d1e6d9] bg-[#f8fbfa] h-12 px-4 text-base" />
+          </div>
+          <p>*Soumettre le formulaire avant d'acceder aux autres modification</p>
+          <div class="flex gap-4 mt-8 justify-center">
 
-        <button type="submit" id="bouton">Enregistrer</button>
-      </form>
+          <p class="text-slate-500">Modifier :</p>
+          <a href="indexPrestation.html">
+            <button type="button" class="bg-blue-100 text-blue-700 font-semibold rounded-lg h-10 px-6 hover:bg-blue-200 transition">
+              prestations
+            </button>
+          </a>
+          <a href="lister_types_chambre.html">
+            <button type="button" class="bg-green-100 text-green-700 font-semibold rounded-lg h-10 px-6 hover:bg-green-200 transition">
+              types de chambres
+            </button>
+          </a>
+        </div>
+          <div class="flex justify-end">
+            <button type="submit"
+              class="bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold rounded-lg h-10 px-8 hover:from-blue-700 hover:to-blue-900 transition">
+              Enregistrer
+            </button>
+          </div>
+        </form>
+      </div>
     </main>
-
-    <script src="js/hotel.js"></script>
-  </body>
+  </div>
+  <script src="js/main.js"></script>
+  <script src="js/modifier_hotel.js" type="module"></script>
+</body>
 </html>

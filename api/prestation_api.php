@@ -13,6 +13,18 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
     case 'GET':
         // Lister toutes les prestations
+        // Si un id est passé en paramètre, on récupère la prestation par son id
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $prestations = handleListerPrestation($id);
+            if ($prestations) {
+                echo json_encode($prestations);
+            } else {
+                http_response_code(404);
+                echo json_encode(['error' => 'Prestation non trouvée']);
+            }
+            exit();
+        }
         $prestations = handleListerPrestation();
         echo json_encode($prestations);
         break;
@@ -20,8 +32,8 @@ switch ($method) {
     case 'POST':
         // Créer une prestation
         $data = json_decode(file_get_contents('php://input'), true);
-        if (isset($data['id'], $data['prix'], $data['description'])) {
-            $result = handleCreatePrestation($data['id'], $data['prix'], $data['description']);
+        if (isset( $data['prix'], $data['description'])) {
+            $result = handleCreatePrestation($data['prix'], $data['description']);
             echo json_encode(['success' => $result]);
         } else {
             http_response_code(400);
@@ -43,9 +55,9 @@ switch ($method) {
 
     case 'DELETE':
         // Supprimer une prestation
-        parse_str(file_get_contents('php://input'), $data);
-        if (isset($data['id'])) {
-            $result = handleSupprimerPrestation($data['id']);
+        // Récupérer l'id depuis la query string (car le JS envoie .../prestation_api.php?id=XX)
+        if (isset($_GET['id'])) {
+            $result = handleSupprimerPrestation($_GET['id']);
             echo json_encode(['success' => $result]);
         } else {
             http_response_code(400);

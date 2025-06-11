@@ -23,8 +23,8 @@ switch ($method) {
     case 'POST':
         // Créer d'un nouvel hotel
         $data = json_decode(file_get_contents('php://input'), true);
-        if (isset($data['nom_hotel'], $data['nombres_chambres'], $data['pays'], $data['addresse'], $data['image_hotel'])) {
-            $result = handleCreateHotel($data['nom_hotel'], $data['nombres_chambres'], $data['pays'], $data['addresse'], $data['image_hotel']);
+        if (isset($data['nom_hotel'], $data['nombres_chambres'], $data['pays'], $data['adresse'], $data['image_hotel'])) {
+            $result = handleCreateHotel($data['nom_hotel'], $data['nombres_chambres'], $data['pays'], $data['adresse'], $data['image_hotel']);
             if ($result) {
                 http_response_code(201);
                 echo json_encode(['success' => true]);
@@ -41,8 +41,8 @@ switch ($method) {
     case 'PUT':
         // Modifier un hotel
         $data = json_decode(file_get_contents('php://input'), true);
-        if (isset($data['id'], $data['nom_hotel'], $data['nombres_chambres'], $data['pays'], $data['addresse'], $data['image_hotel'])) {
-            $result = handleModifierHotel($data['nom_hotel'], $data['nombres_chambres'], $data['pays'], $data['addresse'], $data['image_hotel'], $data['id']);
+        if (isset( $data['nom_hotel'], $data['nombres_chambres'], $data['pays'], $data['adresse'], $data['image_hotel'])) {
+            $result = handleModifierHotel($data['nom_hotel'], $data['nombres_chambres'], $data['pays'], $data['adresse'], $data['image_hotel']);
             if ($result) {
                 echo json_encode(['success' => true]);
             } else {

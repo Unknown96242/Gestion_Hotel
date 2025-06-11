@@ -1,11 +1,11 @@
 <?php
 
     //Creation d'un hotel
-    function createHotel(PDO $pdo,$nom_hotel, $nombres_chambres, $pays, $addresse, $image_hotel){        
+    function createHotel(PDO $pdo,$nom_hotel, $nombres_chambres, $pays, $adresse, $image_hotel){        
 
-        $SQL_INSERT_HOTEL = "INSERT INTO hotel (nom_hotel, nombres_chambres, pays, addresses, image_hotel) VALUES(?, ?, ?, ?, ?)";
+        $SQL_INSERT_HOTEL = "INSERT INTO hotel (nom_hotel, nombres_chambres, pays, adresses, image_hotel) VALUES(?, ?, ?, ?, ?)";
         $stmt = $pdo->prepare($SQL_INSERT_HOTEL);
-        $stmt->execute([$nom_hotel, $nombres_chambres, $pays, $addresse, $image_hotel]);
+        $stmt->execute([$nom_hotel, $nombres_chambres, $pays, $adresse, $image_hotel]);
 
         return $stmt->rowCount()>0;
     }
@@ -21,10 +21,10 @@
     }
 
      //Modifier un hotel
-    function modifierHotel(PDO $pdo, $nom_hotel, $nombres_chambres, $pays, $addresse, $image_hotel, $id) {
-    $SQL_UPDATE_HOTEL = "UPDATE hotel SET nom_hotel = ?, nombres_chambres = ?  WHERE id=?";
+    function modifierHotel(PDO $pdo, $nom_hotel, $nombres_chambres, $pays, $adresse, $image_hotel) {
+    $SQL_UPDATE_HOTEL = "UPDATE hotel SET nom_hotel = ?, nombres_chambres = ?, pays = ?, adresse = ?, image_hotel = ?";
     $stmt = $pdo->prepare($SQL_UPDATE_HOTEL);
-    $stmt->execute([$nom_hotel, $nombres_chambres, $pays, $addresse, $image_hotel, $id]);
+    $stmt->execute([$nom_hotel, $nombres_chambres, $pays, $adresse, $image_hotel]);
     return $stmt->rowCount()>0;
     }
 

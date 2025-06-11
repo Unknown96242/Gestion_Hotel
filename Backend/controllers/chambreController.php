@@ -15,15 +15,9 @@ function handleGetChambre() {
 }
 
 // Récupérer les chambres disponibles
-function handleGetChambreDispo() {
+function handleGetChambreDispo($dispo) {
     global $pdo;
-    return getChambreDispo($pdo);
-}
-
-// Récupérer les chambres non disponibles
-function handleGetChambreNonDispo() {
-    global $pdo;
-    return getChambreNonDispo($pdo);
+    return getChambreDispo($pdo, $dispo);
 }
 
 // Modifier une chambre

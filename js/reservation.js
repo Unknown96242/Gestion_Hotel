@@ -1,4 +1,5 @@
-// import { getReservations} from './api.js';
+import { RACINE } from './config_general.js';
+
 import { showToast } from "./utils.js";
 import { recupererDonnee, redirection, estEmailValide, afficherErreurSimple  } from './utils.js';
 
@@ -7,7 +8,7 @@ const reservationTable = document.getElementById('reservation-table-body');
 function afficherSpinner() {
   const spinnerRow = document.createElement('tr');
   const spinnerCell = document.createElement('td');
-  spinnerCell.colSpan = 8; // adapte selon le nombre de colonnes de ton tableau
+  spinnerCell.colSpan = 8; 
   spinnerCell.style.textAlign = 'center';
   spinnerCell.innerHTML = `
     <div class="spinner">
@@ -25,75 +26,100 @@ afficherSpinner();
 const MIN_SPINNER_TIME = 2000; // 2 secondes
 const startTime = Date.now();
 
-fetch('http://localhost/gestionhotelerie/api/reservation_api.php')
+let allReservations = []; // Stocke toutes les réservations pour la recherche
+
+// Fonction pour afficher les réservations dans le tableau
+function afficherReservations(reservations) {
+  const reservationTable = document.getElementById('reservation-table-body');
+  reservationTable.innerHTML = '';
+  if (!reservations || reservations.length === 0) {
+    reservationTable.innerHTML = '<tr><td colspan="8" class="text-center py-4 text-slate-400">Aucune réservation trouvée.</td></tr>';
+    return;
+  }
+  reservations.forEach(reservation => {
+    const statusColor = getStatusBgColor(reservation.status);
+    const row = document.createElement('tr');
+    row.classList.add('border-t', 'border-t-[#dde1e3]');
+    row.innerHTML = `
+      <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-120 h-[72px] px-4 py-2 w-[400px] text-[#6a7781] text-sm font-normal leading-normal">
+        ${reservation.reservation_id}
+      </td>
+      <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-240 h-[72px] px-4 py-2 w-[400px] text-[#6a7781] text-sm font-normal leading-normal">
+        ${reservation.client_nom} ${reservation.client_prenom}
+      </td>
+      <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-360 h-[72px] px-4 py-2 w-[400px] text-[#6a7781] text-sm font-normal leading-normal">
+        ${reservation.chambre_numero}-${reservation.chambre_description}
+      </td>
+      <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-480 h-[72px] px-4 py-2 w-[400px] text-[#6a7781] text-sm font-normal leading-normal">
+        ${reservation.date_deb}
+      </td>
+      <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-600 h-[72px] px-4 py-2 w-[400px] text-[#6a7781] text-sm font-normal leading-normal">
+        ${reservation.date_fin}
+      </td>
+      <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-720 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
+        <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 ${statusColor} font-medium leading-normal w-full">
+          <span class="truncate">${reservation.status}</span>
+        </button>
+      </td>
+      <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-840 h-[72px] px-4 py-2 w-[400px] text-[#6a7781] text-sm font-normal leading-normal">
+        ${reservation.cout_total} fcfa
+      </td>
+      <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-960 h-[72px] px-4 py-2 w-60 text-[#6a7781] text-sm font-bold leading-normal tracking-[0.015em]">
+        <button class="btn text-blue-500 bg-white edit-btn" data-id="${reservation.reservation_id}">Modifier</button>
+        <button class="btn text-red-500 bg-white delete-btn" data-id="${reservation.reservation_id}">Supprimer</button>
+      </td>
+    `;
+    reservationTable.appendChild(row);
+  });
+}
+
+// Récupération des réservations et affichage initial
+fetch(`http://localhost/${RACINE}/api/reservation_api.php`)
   .then(response => response.json())
   .then(reservations => {
-    const elapsed = Date.now() - startTime;
-    const waitTime = Math.max(0, MIN_SPINNER_TIME - elapsed);
-    setTimeout(() => {
-      if (reservations && reservations.length > 0) {
-        // Vider le tableau avant d'ajouter les nouvelles réservations
-        reservationTable.innerHTML = '';
-        reservations.forEach(reservation => {
-          const statusColor = getStatusBgColor(reservation.status);
-          // Utilise uniquement les clés utiles (pas les clés numériques)
-          const row = document.createElement('tr');
-          row.classList.add('border-t', 'border-t-[#dde1e3]');
-          row.innerHTML = `
-              <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-120 h-[72px] px-4 py-2 w-[400px] text-[#6a7781] text-sm font-normal leading-normal">
-                  ${reservation.reservation_id}</td>
-              <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-240 h-[72px] px-4 py-2 w-[400px] text-[#6a7781] text-sm font-normal leading-normal">
-                  ${reservation.client_nom} ${reservation.client_prenom}
-              </td>
-              <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-360 h-[72px] px-4 py-2 w-[400px] text-[#6a7781] text-sm font-normal leading-normal">
-                  Hôtel du Lac
-              </td>
-              <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-480 h-[72px] px-4 py-2 w-[400px] text-[#6a7781] text-sm font-normal leading-normal">
-                  ${reservation.date_deb}
-              </td>
-              <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-600 h-[72px] px-4 py-2 w-[400px] text-[#6a7781] text-sm font-normal leading-normal">
-                  ${reservation.date_fin}
-              </td>
-              <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-720 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 ${statusColor} font-medium leading-normal w-full">
-                      <span class="truncate">${reservation.status}</span>
-                  </button>
-              </td>
-              <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-840 h-[72px] px-4 py-2 w-[400px] text-[#6a7781] text-sm font-normal leading-normal">
-                  ${reservation.cout_total} fcfa</td>
-              <td class="table-9c4d128b-6f8e-48cf-a4c2-0908449781da-column-960 h-[72px] px-4 py-2 w-60 text-[#6a7781] text-sm font-bold leading-normal tracking-[0.015em]">
-                  Voir
-              </td>
-              <td>
-                  <button class="btn text-blue-500 bg-white edit-btn" data-id="${reservation.reservation_id}">Modifier</button>
-                  <button class="btn text-red-500 bg-white delete-btn" data-id="${reservation.reservation_id}">Supprimer</button>
-              </td>`;
-          reservationTable.appendChild(row);
-        });
-      } else {
-        reservationTable.innerHTML = '<tr><td colspan="8">Aucune réservation trouvée.</td></tr>';
-      }
-    }, waitTime);
+    allReservations = reservations;
+    afficherReservations(reservations);
   })
   .catch(error => {
-    const elapsed = Date.now() - startTime;
-    const waitTime = Math.max(0, MIN_SPINNER_TIME - elapsed);
-    setTimeout(() => {
-      console.error('Erreur lors de la récupération des réservations:', error);
-      reservationTable.innerHTML = '<tr class="border-t border-t-[#dde1e3]"><td colspan="8">Erreur lors de la récupération des réservations.</td></tr>';
-    }, waitTime);
+    document.getElementById('reservation-table-body').innerHTML = '<tr><td colspan="8" class="text-center py-4 text-red-400">Erreur lors du chargement des réservations.</td></tr>';
   });
 
+// Barre de recherche fonctionnelle
+const searchInput = document.querySelector('input[placeholder="Rechercher des réservations"]');
+if (searchInput) {
+  searchInput.addEventListener('input', function () {
+    const query = this.value.trim().toLowerCase();
+    const filtered = allReservations.filter(reservation => {
+      return (
+        (reservation.reservation_id && reservation.reservation_id.toString().includes(query)) ||
+        (reservation.client_nom && reservation.client_nom.toLowerCase().includes(query)) ||
+        (reservation.client_prenom && reservation.client_prenom.toLowerCase().includes(query)) ||
+        (reservation.chambre_numero && reservation.chambre_numero.toString().includes(query)) ||
+        (reservation.chambre_description && reservation.chambre_description.toLowerCase().includes(query)) ||
+        (reservation.status && reservation.status.toLowerCase().includes(query)) ||
+        (reservation.cout_total && reservation.cout_total.toString().includes(query))
+      );
+    });
+    afficherReservations(filtered);
+  });
+}
+
+// Fonction utilitaire pour la couleur du statut (à adapter selon ton code)
 function getStatusBgColor(status) {
-  switch (status.toLowerCase()) {
-    case 'en attente':
-      return 'bg-yellow-300 text-black';
-    case 'annuler':
-      return 'bg-red-400 text-white';
+  switch ((status || '').toLowerCase()) {
+    case 'valide':
     case 'valider':
-      return 'bg-green-400 text-white';
+      return 'bg-green-100 text-green-700';
+    case 'en attente':
+      return 'bg-yellow-100 text-yellow-700';
+    case 'annulée':
+    case 'annulé':
+      return 'bg-red-100 text-red-700';
+    case 'terminée':
+    case 'terminé':
+      return 'bg-gray-100 text-gray-700';
     default:
-      return 'bg-[#f1f2f4] text-[#121516]';
+      return 'bg-slate-100 text-slate-700';
   }
 }
 
@@ -105,7 +131,7 @@ reservationTable.addEventListener('click', function (e) {
       "Voulez-vous vraiment supprimer cette réservation ?",
       () => {
         // Si confirmé
-        fetch('http://localhost/projet-php/api/reservation_api.php', {
+        fetch(`http://localhost/${RACINE}/api/reservation_api.php`, {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: `id=${encodeURIComponent(id)}`

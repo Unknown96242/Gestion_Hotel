@@ -5,10 +5,17 @@ require_once __DIR__ . '/../models/reservationModel.php';
 function ListerReservation(PDO $pdo) {
     return ListerAllReservation($pdo);
 }
+function ListerReservationById(PDO $pdo, $id) {
+    // Vérification de l'existence de l'ID
+    if (empty($id)) {
+        return ["error" => "ID manquant"];
+    }
+    return ListerOnReservationById($pdo, $id);
+}
 // Créer une nouvelle reservation
-function createReservation(PDO $pdo, $id_client_fk, $status, $mode_paiement, $date_limite, $date_deb, $date_fin, $cout_total, $id_chambre, $id_prestation_fk) {
+function createReservation(PDO $pdo, $id_client_fk, $status, $mode_paiement, $date_limite, $date_deb, $date_fin, $cout_total, $id_chambre_fk, $id_prestation_fk) {
     // Vérification des paramètres obligatoires
-    if (empty($id_client_fk) || empty($status) || empty($mode_paiement) || empty($date_deb) || empty($date_fin) || empty($id_chambre)) {
+    if (empty($id_client_fk) || empty($status) || empty($mode_paiement) || empty($date_deb) || empty($date_fin) || empty($id_chambre_fk)) {
         return ["error" => "Paramètres manquants"];
     }
     // Vérification de la cohérence des dates
@@ -16,18 +23,18 @@ function createReservation(PDO $pdo, $id_client_fk, $status, $mode_paiement, $da
         return ["error" => "La date de début doit être avant la date de fin"];
     }
     // Appel au modèle si tout est OK
-    return createNewReservation($pdo, $id_client_fk, $status, $mode_paiement, $date_limite, $date_deb, $date_fin, $cout_total, $id_chambre, $id_prestation_fk);
+    return createNewReservation($pdo, $id_client_fk, $status, $mode_paiement, $date_limite, $date_deb, $date_fin, $cout_total, $id_chambre_fk, $id_prestation_fk);
 }
 // Modifier une reservation existante
-function updateReservation(PDO $pdo, $id, $id_client_fk, $status, $mode_paiement, $date_limite, $date_deb, $date_fin, $cout_total, $id_chambre, $id_prestation_fk) {
-    if (empty($id_client_fk) || empty($status) || empty($mode_paiement) || empty($date_deb) || empty($date_fin) || empty($id_chambre)) {
+function updateReservation(PDO $pdo, $id, $id_client_fk, $status, $mode_paiement, $date_limite, $date_deb, $date_fin, $cout_total, $id_chambre_fk, $id_prestation_fk) {
+    if (empty($id_client_fk) || empty($status) || empty($mode_paiement) || empty($date_deb) || empty($date_fin) || empty($id_chambre_fk)) {
         return ["error" => "Paramètres manquants"];
     }
     // Vérification de la cohérence des dates
     if (strtotime($date_deb) > strtotime($date_fin)) {
         return ["error" => "La date de début doit être avant la date de fin"];
     }
-    return updateOldReservation($pdo, $id, $id_client_fk, $status, $mode_paiement, $date_limite, $date_deb, $date_fin, $cout_total, $id_chambre, $id_prestation_fk);
+    return updateOldReservation($pdo, $id, $id_client_fk, $status, $mode_paiement, $date_limite, $date_deb, $date_fin, $cout_total, $id_chambre_fk, $id_prestation_fk);
 }
 // Supprimer une reservation
 function deleteReservation(PDO $pdo, $id) {

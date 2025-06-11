@@ -1,113 +1,74 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Modifier une prestation</title>
-  <link rel="stylesheet" href="">
-</head>
-<style>
-    body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  display: flex;
-  background-color: #f4f4f4;
-}
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
 
-.sidebar {
-  width: 240px;
-  background-color: #fff;
-  padding: 20px;
-  border-right: 1px solid #ddd; 
-  height: 100vh;
-}
+    <title>HotelGod</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
-.sidebar h2 {
-  font-size: 20px;
-  margin-bottom: 30px;
-}
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="css/style.css">
 
-.sidebar nav a {
-  display: block;
-  padding: 10px;
-  margin-bottom: 10px;
-  color: #333;
-  text-decoration: none;
-  border-radius: 8px;
-}
+  </head>
 
-.sidebar nav a.active {
-  background-color: #eee;
-  font-weight: bold;
-}
-
-main {
-  flex: 1;
-  padding: 30px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.btn {
-  background-color: #007BFF;
-  border: none;
-  padding: 10px 18px;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-table {
-  width: 100%;
-  margin-top: 20px;
-  border-collapse: collapse;
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-th, td {
-  padding: 15px;
-  text-align: left;
-  border-bottom: 1px solid #eee;
-}
-
-.form input {
-  display: block;
-  margin-bottom: 15px;
-  padding: 10px;
-  width: 100%;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-button + button {
-  margin-left: 10px;
-}
-
-</style>
 <body>
-  <div class="sidebar">
-    <h2>Gestion</h2>
-    <nav>
-      <a href="indexPrestation.html" class="active">Prestations</a>
-    </nav>
+  <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
+        style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
+        <div class="layout-container flex h-full grow flex-col">
+            <div class="gap-1 px-6 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col w-80">
+                    <!-- Sidebar identique -->
+                    <div class="fixed top-0 left-0 h-screen w-80 bg-gradient-to-b from-green-600 via-green-400 to-green-200 border-r border-slate-100 flex flex-col justify-between py-8 px-6 shadow-lg z-20">
+                        <div>
+                            <div class="flex h-full flex-col justify-between bg-transparent p-4">
+                                <div class="flex flex-col gap-4">
+                                    <h1 class="text-white text-2xl font-extrabold leading-normal tracking-wide drop-shadow">HotelGod</h1>
+                                    <div class="flex flex-col gap-2 navigation">
+                                        <!-- Ajouter les navigations -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-10">
+                            <span class="text-xs text-white/80">&copy; 2025 HotelGod</span>
+                        </div>
+                    </div>
+                </div>
+
+                <main class="flex-1  justify-center">
+                  <div class="max-w-md w-full bg-white rounded-2xl shadow-lg px-8 py-10 flex flex-col items-center">
+                    <h2 class="text-2xl font-bold text-green-700 mb-8 text-center">Modifier une prestation</h2>
+                    <form id="editForm" class="w-full space-y-6">
+                      <input type="hidden" name="id" id="prestation-id" />
+                      <div>
+                        <label class="block text-slate-700 font-medium mb-1" for="description">Description</label>
+                        <input name="description" id="description" type="text" placeholder="Description" required
+                          class="form-input w-full rounded-lg border border-green-200 bg-green-50 h-12 px-4 text-base" />
+                      </div>
+                      <div>
+                        <label class="block text-slate-700 font-medium mb-1" for="prix">Prix</label>
+                        <input name="prix" id="prix" type="number" placeholder="Prix" required
+                          class="form-input w-full rounded-lg border border-green-200 bg-green-50 h-12 px-4 text-base" />
+                      </div>
+                      <div class="flex justify-end">
+                        <button type="submit"
+                          class="bg-gradient-to-r from-green-500 to-green-700 text-white font-bold rounded-lg h-10 px-8 shadow hover:from-green-600 hover:to-green-800 transition">
+                          Mettre à jour
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </main>
+            </div>
+        </div>
   </div>
-
-  <main>
-    <h1>Modifier une prestation</h1>
-    <form id="editForm" class="form">
-      <input type="hidden" name="id" />
-      <input name="description" type="text" placeholder="Description" required />
-      <input name="prix" type="number" placeholder="Prix" required />
-      <button type="submit" class="btn">Mettre à jour</button>
-    </form>
-  </main>
-
-  <script src="ScriptPrestation.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/ScriptPrestation.js" type="module"></script>
 </body>
 </html>

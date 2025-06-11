@@ -2,115 +2,91 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>HotelGod</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link rel="stylesheet" href="assets/css/navCss.css">
-    <title>Document</title>
-</head>
+
+  </head>
 
 <body>
-    <div class="container">
-        <div class="nav">
-            <div class="Logo">
-                <a class="noLine" href="#">
-                    <h2>Admin Panel</h2>
-                </a>
-            </div>
-            <div class="navLink">
-                <ul style="list-style: none;">
-                    <li><a title="dashboard" href="#"><img style="width: 34px;height: 34px;" src="assets/icon/hut.png"
-                                title="house icons" alt="">Tableau de bord</a></li>
-                    <li><a title="reservation" href="#"><img style="width: 34px;height: 34px;"
-                                src="assets/icon/calendrier.png" title="house icons" alt="">Reservation</a></li>
-                    <li><a title="votre hotel" href="#"><img style="width: 34px;height: 34px;"
-                                src="assets/icon/hotel.png" title="house icons" alt="">Hôtel</a></li>
-                    <li><a title="utilisateurs" href="#"><img style="width: 34px;height: 34px;"
-                                src="assets/icon/groupe.png" title="house icons" alt="">Utilisateurs</a></li>
-                    <li><a title="Chambres" href="#"><img style="width: 34px;height: 34px;"
-                                src="assets/icon/chambre.png" title="house icons" alt="">chambres</a></li>
-                    <li><a title="parametre" href="#"><img style="width: 34px;height: 34px;"
-                                src="assets/icon/parametres.png" title="house icons" alt="">Paramètres</a></li>
-                </ul>
+    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
+        style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
+        <div class="layout-container flex h-full grow flex-col">
+            <div class="gap-1 px-6 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col w-80">
+                    <!-- Sidebar identique -->
+                    <div class="fixed top-0 left-0 h-screen w-80 bg-gradient-to-b from-green-600 via-green-400 to-green-200 border-r border-slate-100 flex flex-col justify-between py-8 px-6 shadow-lg z-20">
+                        <div>
+                            <div class="flex h-full flex-col justify-between bg-transparent p-4">
+                                <div class="flex flex-col gap-4">
+                                    <h1 class="text-white text-2xl font-extrabold leading-normal tracking-wide drop-shadow">HotelGod</h1>
+                                    <div class="flex flex-col gap-2 navigation">
+                                        <!-- Ajouter les navigations -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-10">
+                            <span class="text-xs text-white/80">&copy; 2025 HotelGod</span>
+                        </div>
+                    </div>
+                </div>
+                <main class="flex-1  justify-center">
+                  <div class="max-w-3xl w-full bg-white rounded-2xl shadow-lg px-8 py-10 flex flex-col">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+                      <h1 class="text-2xl font-bold text-slate-900">Gestion des chambres</h1>
+                      <a href="#" class="bg-gradient-to-r from-green-500 to-green-700 text-white font-medium py-2 px-6 rounded-lg shadow hover:from-green-600 hover:to-green-800 transition text-center">
+                        Ajouter une chambre
+                      </a>
+                    </div>
+                    <p class="text-slate-500 mb-6">Voir et gérer toutes les chambres de l'hôtel</p>
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                      <div class="flex items-center gap-2">
+                        <label for="trieInput" class="text-slate-700 font-medium">Trier par :</label>
+                        <select name="trier" id="trieInput" class="form-select rounded-lg border border-slate-200 bg-slate-50 h-10 px-3 text-base">
+                          <option value="nul">Par défaut</option>
+                          <option value="libre">Chambres libres</option>
+                          <option value="occupe">Chambres occupées</option>
+                        </select>
+                      </div>
+                      <!-- Recherche (optionnelle, décommente si besoin)
+                      <div class="flex items-center gap-2">
+                        <input class="form-input rounded-lg border border-slate-200 bg-slate-50 h-10 px-3 text-base" type="text" placeholder="Rechercher une chambre..." />
+                        <button class="bg-green-100 text-green-700 rounded-lg px-4 h-10 hover:bg-green-200 transition">Rechercher</button>
+                      </div>
+                      -->
+                    </div>
+                    <div class="overflow-x-auto rounded-lg">
+                      <table id="tableDisplayRoom" class="min-w-full text-sm text-left">
+                        <thead>
+                          <tr class="bg-green-50 text-green-900">
+                            <th class="py-3 px-4 font-semibold">N° Chambre</th>
+                            <th class="py-3 px-4 font-semibold">Type Chambres</th>
+                            <th class="py-3 px-4 font-semibold">Status</th>
+                            <th class="py-3 px-4 font-semibold">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tbodyDisplayRoom" class="divide-y divide-slate-100">
+                          <!-- Les lignes seront injectées ici -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </main>
             </div>
         </div>
-        <main class="main">
-            <div class="contEnTete">
-                <h1>Gestion des chambres </h1>
-                <a href="#">Ajouter une chambre</a>
-            </div>
-            <p class="informationText">Voir et gerer toutes les chambres de l'hotel</p>
-            <!-- From Uiverse.io by OnlyCodeChannel -->
-            <!-- <div class="searchBox">
-
-                <input class="searchInput" type="text" name="" placeholder="Search something">
-                <button class="searchButton" onclick="console.log('oui')" href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
-                        <g clip-path="url(#clip0_2_17)">
-                            <g filter="url(#filter0_d_2_17)">
-                                <path
-                                    d="M23.7953 23.9182L19.0585 19.1814M19.0585 19.1814C19.8188 18.4211 20.4219 17.5185 20.8333 16.5251C21.2448 15.5318 21.4566 14.4671 21.4566 13.3919C21.4566 12.3167 21.2448 11.252 20.8333 10.2587C20.4219 9.2653 19.8188 8.36271 19.0585 7.60242C18.2982 6.84214 17.3956 6.23905 16.4022 5.82759C15.4089 5.41612 14.3442 5.20435 13.269 5.20435C12.1938 5.20435 11.1291 5.41612 10.1358 5.82759C9.1424 6.23905 8.23981 6.84214 7.47953 7.60242C5.94407 9.13789 5.08145 11.2204 5.08145 13.3919C5.08145 15.5634 5.94407 17.6459 7.47953 19.1814C9.01499 20.7168 11.0975 21.5794 13.269 21.5794C15.4405 21.5794 17.523 20.7168 19.0585 19.1814Z"
-                                    stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
-                                    shape-rendering="crispEdges"></path>
-                            </g>
-                        </g>
-                        <defs>
-                            <filter id="filter0_d_2_17" x="-0.418549" y="3.70435" width="29.7139" height="29.7139"
-                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
-                                <feColorMatrix in="SourceAlpha" type="matrix"
-                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha">
-                                </feColorMatrix>
-                                <feOffset dy="4"></feOffset>
-                                <feGaussianBlur stdDeviation="2"></feGaussianBlur>
-                                <feComposite in2="hardAlpha" operator="out"></feComposite>
-                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0">
-                                </feColorMatrix>
-                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2_17">
-                                </feBlend>
-                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2_17" result="shape">
-                                </feBlend>
-                            </filter>
-                            <clipPath id="clip0_2_17">
-                                <rect width="28.0702" height="28.0702" fill="white"
-                                    transform="translate(0.403503 0.526367)"></rect>
-                            </clipPath>
-                        </defs>
-                    </svg>
-
-
-                </button>
-            </div> -->
-
-            Trier par :
-            <select name="trier" id="trieInput">
-                <option value="nul">Par defaut</option>
-                <option value="libre">Chambre libres</option>
-                <option value="nolibre">Chambre occupées</option>
-            </select>
-
-            <table id="tableDisplayRoom">
-                <thead>
-                    <tr>
-                        <th>N° Chambre</th>
-                        <th>Type Chambres</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="tbodyDisplayRoom">
-                    <!-- <tr>
-                        <td>101</td>
-                        <td class="informationText typeRoom">Single</td>
-                        <td ><p class="status">Vacants</p></td>
-                        <td class="btnAction">
-                            <a href="#">voir details</a>
-                        </td>
-                    </tr> -->
-                </tbody>
-            </table>
-        </main>
     </div>
-
-    <script src="js/Chambre.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/Chambre.js" type="module"></script>
 </body>
 </html>
